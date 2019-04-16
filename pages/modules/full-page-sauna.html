@@ -1,0 +1,81 @@
+<div class="full-page">
+    <div class="slider">
+        <div class="full-page-slide">
+            <div><img src="images/slides/slide-1.png"></div>
+            <div><img src="images/slides/slide-2.png"></div>
+            <div><img src="images/slides/slide-3.png"></div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.full-page-slide').slick({
+                    arrows: false,
+                    dots: true,
+                    infinite: true,
+                    speed: 500,
+                    fade: true,
+                    cssEase: 'linear'
+                });
+            });
+        </script>
+        
+        <div class="sauna">
+            <div class="header">
+                Интерьеры бани
+            </div>
+            <div class="name">
+                Баня №1
+            </div>
+        </div>
+
+        <div class="price-date">
+            <div class="price">
+                <div class="realprice">1 499 руб./час</div>
+                <div class="row-2">мин. заказ 2 часа</div>
+            </div>
+            <div class="date">
+                <div class="row-1">
+                    <img src="images/svg/timetable-b.svg"> 19.04.2019
+                </div>
+                <div class="row-2">
+                    19:00 - 23:00
+                </div>
+            </div>
+        </div>
+
+        <div class="order">
+            <div class="control">
+                <div class="buttons">
+                    <div class="btn decrement disabled">-</div>
+                    <div class="result">1</div>
+                    <div class="btn  increment">+</div>
+                </div>
+                <p class="dop">кол. человек<br>+ 100 руб.** </p>
+            </div>
+            <a class="order-btn button">ЗАКАЗАТЬ</a>
+        </div>
+
+        <div class="in-order">
+            <p>В стоимость входит:</p>
+            <div class="row">
+                <div class="col">
+                    <div>Простыня</div>
+                    <div>Полотенце</div>
+                    <div>Тапочки</div>
+                    <div>Джакузи</div>
+                    <div>Душ</div>
+                </div>
+                <div class="col">
+                    <div>Купель: 5х5 м</div>
+                    <div>Парная: 15 кв.м</div>
+                    <div>Зона отдыха: 30 кв.м</div>
+                    <div>Комната отдыха</div>
+                    <div>TV</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="last-text">
+            Дополнительно оплачивается: 1) *Караоке. 2) **За каждого дополнительного гостя в номерах взимается плата в размере 100 руб. с человека в час.
+        </div>
+    </div>
+</div>

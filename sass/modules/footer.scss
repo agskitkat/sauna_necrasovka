@@ -1,0 +1,33 @@
+footer {
+  padding-bottom: 40px;
+  .footer-text {
+    font-size: 14px;
+    line-height: 18px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: $gray-1;
+    border-bottom: 1px solid $gray-3;
+  }
+  .phone {
+    padding-top:30px;
+    text-align: center;
+    font-size:18px;
+    font-weight: bold;
+  }
+  .email {
+    padding-top:4px;
+    text-align: center;
+    font-weight: bold;
+    color: $gray-1;
+  }
+  .common {
+    padding-top:20px;
+    text-align: center;
+    font-weight: bold;
+    color: $gray-1;
+  }
+  .social {
+    padding-top:20px;
+    text-align: center;
+  }
+}

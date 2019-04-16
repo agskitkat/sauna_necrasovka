@@ -1,0 +1,42 @@
+header {
+  .header {
+    padding-top:16px;
+    .logo {
+      text-align: center;
+      border-bottom: 1px solid #C4C4C4;
+      padding-bottom: 10px;
+      .big {
+        display:block;
+        font-size:24px;
+        font-weight: bold;
+      }
+      .small {
+        padding-top:5px;
+        display:block;
+        font-size:10px;
+      }
+    }
+    .menu {
+      padding-top:10px;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      .phone-n-time {
+        text-align: center;
+        margin: 0 auto;
+        .phone {
+          font-size:16px;
+          font-weight: bold;
+          text-decoration: none;
+          color:$black;
+        }
+        .time {
+          display: block;
+          padding-top:2px;
+          font-size: 10px;
+          color:$light-red;
+        }
+      }
+    }
+  }
+}
