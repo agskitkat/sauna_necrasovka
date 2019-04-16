@@ -1,0 +1,95 @@
+<div class="full-page">
+    <div class="button-back">
+        <img src="images/svg/back-w.svg">
+    </div>
+    <div class="slider">
+        <div class="full-page-slide slide-service">
+            <div><img src="images/slides/slide-1.png"></div>
+            <div><img src="images/slides/slide-2.png"></div>
+            <div><img src="images/slides/slide-3.png"></div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.slide-service').slick({
+                    arrows: false,
+                    dots: true,
+                    infinite: true,
+                    speed: 500,
+                    fade: true,
+                    cssEase: 'linear'
+                });
+            });
+        </script>
+
+        <div class="sauna">
+            <div class="header">
+                Услуги бани
+            </div>
+            <div class="name">
+                Банщик
+            </div>
+        </div>
+
+        <div class="price-date order no-top-padding">
+            <div class="price">
+                <div class="realprice">2 499 руб.</div>
+                <div class="row-2">Стоимость услуг</div>
+            </div>
+            <a class="order-btn button">ЗАКАЗАТЬ</a>
+        </div>
+
+
+
+        <table class="service-order">
+            <tr class="header-row">
+                <th colspan="2">
+                    Наименованиие
+                </th>
+                <th>
+                    время
+                </th>
+                <th>
+                    стоимость
+                </th>
+            </tr>
+
+            <tr class="item">
+                <td>
+                    1.
+                </td>
+                <td>
+                    Парение классическое
+                </td>
+                <td>
+                    30 мин
+                </td>
+                <td>
+                    4 499 руб.
+                </td>
+            </tr>
+
+            <tr>
+                <td class="break" colspan="5"></td>
+            </tr>
+
+            <tr class="item-order">
+                <td>
+                    <input type="checkbox">
+                </td>
+                <td>
+                    Парение классическое
+                </td>
+                <td>
+                    30 мин
+                </td>
+                <td>
+                    4 499 руб.
+                </td>
+            </tr>
+        </table>
+
+        <div class="last-text">
+            Дополнительно оплачивается: 1) *Караоке. 2) **За каждого дополнительного гостя в номерах взимается плата в размере 100 руб. с человека в час.
+        </div>
+    </div>
+</div>

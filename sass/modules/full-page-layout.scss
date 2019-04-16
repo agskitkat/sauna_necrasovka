@@ -1,4 +1,22 @@
 .full-page {
+  position:relative;
+  .button-back {
+    position:absolute;
+    width:33px;
+    height:33px;
+    text-align: center;
+    top:8px;
+    left:-10px;
+    z-index: 100500;
+    border-radius: 50%;
+    transition: ease-in-out background-color 0.3s;
+    img {
+      margin-top:8px;
+    }
+  }
+  .button-back:hover {
+    background: rgba(255,255,255,0.2);
+  }
   .slider {
     .full-page-slide.slick-slider {
       margin-left:-18px;
@@ -43,6 +61,8 @@
     .header {
       font-size:30px;
       font-weight: bold;
+      width:50%;
+      line-height: 35px;
     }
     .name {
       white-space: nowrap;
@@ -82,8 +102,6 @@
       }
     }
   }
-
-
 
   .order {
     padding-top:20px;
@@ -143,6 +161,42 @@
           font-size:14px;
           color:$gray-1;
         }
+      }
+    }
+  }
+
+  .no-top-padding {
+    padding-top:0px;
+    padding-bottom:15px;
+  }
+
+  .service-order {
+    .header-row {
+      th {
+        padding-bottom:5px;
+      }
+    }
+    th {
+      font-size:10px;
+      color:#C4C4C4;
+      text-align: center;
+    }
+    td {
+      text-align: center;
+      font-size:14px;
+      min-width: 52px;
+    }
+    tr {
+      th:nth-child(1) {
+        text-align: left;
+        min-width: initial;
+      }
+      td:nth-child(1), td:nth-child(2) {
+        text-align: left;
+        min-width: initial;
+      }
+      td:nth-child(2) {
+        padding-left: 5px;
       }
     }
   }
