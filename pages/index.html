@@ -1,10 +1,18 @@
 //= modules/header.html
-
-//= modules/banner.html
-//= modules/seo-text.html
-//= modules/order-list.html
-
-//= modules/full-page-sauna.html
-//= modules/full-page-sauna-service.html
-
+<div class="app" id="app-sauna">
+    <div class="close-content" v-if="view_content">
+        //= modules/menu.html
+        //= modules/banner.html
+        //= modules/seo-text.html
+        //= modules/order-list.html
+        //= modules/footer-block.html
+    </div>
+    <div class="pages" v-if="view_pages">
+        //= modules/full-page-sauna.html
+        //= modules/full-page-sauna-service.html
+        //= modules/full-page-sauna-store.html
+        //= modules/full-page-sauna-menu.html
+        //= modules/full-page-sauna-contacts.html
+    </div>
+</div>
 //= modules/footer.html

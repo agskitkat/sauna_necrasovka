@@ -12,12 +12,20 @@
     <link href="production/styles.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+    <script src="production/scripts.min.js"></script>
+
 </head>
 <body>
     <div class="container">
+<div class="app" id="app-sauna">
+    <div class="close-content" v-if="view_content">
         <header>
             <div class="mobile header">
                 <div class="logo">
@@ -38,253 +46,71 @@
                 </div>
             </div>
             <div class="desktop header">
-
+        
             </div>
         </header>
-
-<div class="banner">
-    <img src="images/banner/banner-320.png">
-</div>
-<div class="seo-text">
-    <h1 class="h1">Баня в Москве</h1>
-    <p>На сайте собран лучший контент, касающийся банных заведениях этого большого города. Если вы хотите Читать полностью</p>
-</div>
-<div class="order-list">
-    <div class="header h1">
-        Забронировать Баню в Москве
-    </div>
-    <div class="list">
-
-        <div class="list-item">
-            <div class="item-list-header">Выберите баню <img src="images/svg/arrow-right.svg"></div>
-            <div class="in-order">
-                <div class="in-orde-item">Баня №1 <span class="price">3 170 руб.</span></div>
-                <div class="date">14.04.2019 г - 19:00 - 23:00</div>
+        <div class="banner">
+            <img src="images/banner/banner-320.png">
+        </div>
+        <div class="seo-text">
+            <h1 class="h1">Баня в Москве</h1>
+            <p>На сайте собран лучший контент, касающийся банных заведениях этого большого города. Если вы хотите Читать полностью</p>
+        </div>
+        <div class="order-list">
+            <div class="header h1">
+                Забронировать Баню в Москве
             </div>
-        </div>
-
-        <div class="list-item">
-            <div class="item-list-header">Услуги бани <img src="images/svg/arrow-right.svg"></div>
-            <div class="in-order">
-                <div class="in-orde-item ">Банщик <span class="price">3 170 руб.</span></div>
-                <div class="in-orde-item ">Массажист <span class="price">2 170 руб.</span></div>
-            </div>
-        </div>
-
-        <div class="list-item">
-            <div class="item-list-header">Аксессуары для бани <img src="images/svg/arrow-right.svg"></div>
-            <div class="in-order">
-                <div class="in-orde-item ">Банный веник <span class="price">3 170 руб.</span></div>
-                <div class="in-orde-item ">Скраб для тела <span class="price">2 170 руб.</span></div>
-            </div>
-        </div>
-
-        <div class="list-item">
-            <div class="item-list-header">Меню ресторана <img src="images/svg/arrow-right.svg"></div>
-            <div class="in-order">
-                <div class="in-orde-item ">Пиво <span class="price">3 170 руб.</span></div>
-                <div class="in-orde-item ">Закуски к пиву <span class="price">2 170 руб.</span></div>
-            </div>
-        </div>
-
-        <div class="list-item">
-            <div class="item-list-header">Как добраться <img src="images/svg/arrow-right.svg"></div>
-            <div class="in-order">
-                <div class="in-orde-item one-string">Адрес</div>
-                <div class="in-orde-item one-string">Контакты</div>
-            </div>
-        </div>
-
-        <div class="list-item green">
-            <div class="item-list-header">Как добраться <img src="images/svg/arrow-right-w.svg"></div>
-            <div class="in-order">
-                <div class="in-orde-item sum">Итого <span class="price">3 170 руб.</span></div>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<div class="full-page">
-    <div class="button-back">
-        <img src="images/svg/back-w.svg">
-    </div>
-    <div class="slider">
-        <div class="full-page-slide">
-            <div><img src="images/slides/slide-1.png"></div>
-            <div><img src="images/slides/slide-2.png"></div>
-            <div><img src="images/slides/slide-3.png"></div>
-        </div>
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $('.full-page-slide').slick({
-                    arrows: false,
-                    dots: true,
-                    infinite: true,
-                    speed: 500,
-                    fade: true,
-                    cssEase: 'linear'
-                });
-            });
-        </script>
+            <div class="list">
         
-        <div class="sauna">
-            <div class="header">
-                Интерьеры бани
-            </div>
-            <div class="name">
-                Баня №1
-            </div>
-        </div>
-
-        <div class="price-date">
-            <div class="price">
-                <div class="realprice">1 499 руб./час</div>
-                <div class="row-2">мин. заказ 2 часа</div>
-            </div>
-            <div class="date">
-                <div class="row-1">
-                    <img src="images/svg/timetable-b.svg"> 19.04.2019
+                <div class="list-item" v-on:click="viewPage('sauna')">
+                    <div class="item-list-header">Выберите баню <img src="images/svg/arrow-right.svg"></div>
+                    <div class="in-order">
+                        <div class="in-orde-item">Баня №1 <span class="price">3 170 руб.</span></div>
+                        <div class="date">14.04.2019 г - 19:00 - 23:00</div>
+                    </div>
                 </div>
-                <div class="row-2">
-                    19:00 - 23:00
+        
+                <div class="list-item"  v-on:click="viewPage('service')">
+                    <div class="item-list-header">Услуги бани <img src="images/svg/arrow-right.svg"></div>
+                    <div class="in-order">
+                        <div class="in-orde-item ">Банщик <span class="price">3 170 руб.</span></div>
+                        <div class="in-orde-item ">Массажист <span class="price">2 170 руб.</span></div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="order">
-            <div class="control">
-                <div class="buttons">
-                    <div class="btn decrement disabled">-</div>
-                    <div class="result">1</div>
-                    <div class="btn  increment">+</div>
+        
+                <div class="list-item"  v-on:click="viewPage('store')">
+                    <div class="item-list-header">Аксессуары для бани <img src="images/svg/arrow-right.svg"></div>
+                    <div class="in-order">
+                        <div class="in-orde-item ">Банный веник <span class="price">3 170 руб.</span></div>
+                        <div class="in-orde-item ">Скраб для тела <span class="price">2 170 руб.</span></div>
+                    </div>
                 </div>
-                <p class="dop">кол. человек<br>+ 100 руб.** </p>
-            </div>
-            <a class="order-btn button">ЗАКАЗАТЬ</a>
-        </div>
-
-        <div class="in-order">
-            <p>В стоимость входит:</p>
-            <div class="row">
-                <div class="col">
-                    <div>Простыня</div>
-                    <div>Полотенце</div>
-                    <div>Тапочки</div>
-                    <div>Джакузи</div>
-                    <div>Душ</div>
+        
+                <div class="list-item"  v-on:click="viewPage('restaran')">
+                    <div class="item-list-header">Меню ресторана <img src="images/svg/arrow-right.svg"></div>
+                    <div class="in-order">
+                        <div class="in-orde-item ">Пиво <span class="price">3 170 руб.</span></div>
+                        <div class="in-orde-item ">Закуски к пиву <span class="price">2 170 руб.</span></div>
+                    </div>
                 </div>
-                <div class="col">
-                    <div>Купель: 5х5 м</div>
-                    <div>Парная: 15 кв.м</div>
-                    <div>Зона отдыха: 30 кв.м</div>
-                    <div>Комната отдыха</div>
-                    <div>TV</div>
+        
+                <div class="list-item"  v-on:click="viewPage('contacts')">
+                    <div class="item-list-header">Как добраться <img src="images/svg/arrow-right.svg"></div>
+                    <div class="in-order">
+                        <div class="in-orde-item one-string">Адрес</div>
+                        <div class="in-orde-item one-string">Контакты</div>
+                    </div>
                 </div>
+        
+                <div class="list-item green" v-on:click="orderProcess()">
+                    <div class="item-list-header">Как добраться <img src="images/svg/arrow-right-w.svg"></div>
+                    <div class="in-order">
+                        <div class="in-orde-item sum">Итого <span class="price">3 170 руб.</span></div>
+                    </div>
+                </div>
+        
             </div>
         </div>
-
-        <div class="last-text">
-            Дополнительно оплачивается: 1) *Караоке. 2) **За каждого дополнительного гостя в номерах взимается плата в размере 100 руб. с человека в час.
-        </div>
-    </div>
-</div>
-<div class="full-page">
-    <div class="button-back">
-        <img src="images/svg/back-w.svg">
-    </div>
-    <div class="slider">
-        <div class="full-page-slide slide-service">
-            <div><img src="images/slides/slide-1.png"></div>
-            <div><img src="images/slides/slide-2.png"></div>
-            <div><img src="images/slides/slide-3.png"></div>
-        </div>
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $('.slide-service').slick({
-                    arrows: false,
-                    dots: true,
-                    infinite: true,
-                    speed: 500,
-                    fade: true,
-                    cssEase: 'linear'
-                });
-            });
-        </script>
-
-        <div class="sauna">
-            <div class="header">
-                Услуги бани
-            </div>
-            <div class="name">
-                Банщик
-            </div>
-        </div>
-
-        <div class="price-date order no-top-padding">
-            <div class="price">
-                <div class="realprice">2 499 руб.</div>
-                <div class="row-2">Стоимость услуг</div>
-            </div>
-            <a class="order-btn button">ЗАКАЗАТЬ</a>
-        </div>
-
-
-
-        <table class="service-order">
-            <tr class="header-row">
-                <th colspan="2">
-                    Наименованиие
-                </th>
-                <th>
-                    время
-                </th>
-                <th>
-                    стоимость
-                </th>
-            </tr>
-
-            <tr class="item">
-                <td>
-                    1.
-                </td>
-                <td>
-                    Парение классическое
-                </td>
-                <td>
-                    30 мин
-                </td>
-                <td>
-                    4 499 руб.
-                </td>
-            </tr>
-
-            <tr>
-                <td class="break" colspan="5"></td>
-            </tr>
-
-            <tr class="item-order">
-                <td>
-                    <input type="checkbox">
-                </td>
-                <td>
-                    Парение классическое
-                </td>
-                <td>
-                    30 мин
-                </td>
-                <td>
-                    4 499 руб.
-                </td>
-            </tr>
-        </table>
-
-        <div class="last-text">
-            Дополнительно оплачивается: 1) *Караоке. 2) **За каждого дополнительного гостя в номерах взимается плата в размере 100 руб. с человека в час.
-        </div>
-    </div>
-</div>
-
         <footer>
             <div class="footer-text">
                 На сайте собран лучший контент, касающийся банных заведениях этого большого города. Если вы хотите Читать полностью
@@ -295,6 +121,407 @@
             <div class="social"><img src="images/social.png"></div>
         </footer>
     </div>
-    <script src="production/scripts.min.js"></script>
+    <div class="pages" v-if="view_pages">
+        <div class="full-page" v-if="view_page === 'sauna'">
+            <div class="button-back" v-on:click="viewMainPage">
+                <img src="images/svg/back-w.svg">
+            </div>
+            <div class="slider">
+                <div class="full-page-slide sauna-slide">
+                    <div><img src="images/slides/slide-1.png"></div>
+                    <div><img src="images/slides/slide-2.png"></div>
+                    <div><img src="images/slides/slide-3.png"></div>
+                </div>
+        
+                
+                <div class="sauna">
+                    <div class="header">
+                        Интерьеры бани
+                    </div>
+                    <div class="name">
+                        Баня №1
+                    </div>
+                </div>
+        
+                <div class="price-date">
+                    <div class="price">
+                        <div class="realprice">1 499 руб./час</div>
+                        <div class="row-2">мин. заказ 2 часа</div>
+                    </div>
+                    <div class="date">
+                        <div class="row-1">
+                            <img src="images/svg/timetable-b.svg"> 19.04.2019
+                        </div>
+                        <div class="row-2">
+                            19:00 - 23:00
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="order">
+                    <div class="control">
+                        <div class="buttons">
+                            <div class="btn decrement disabled">-</div>
+                            <div class="result">1</div>
+                            <div class="btn  increment">+</div>
+                        </div>
+                        <p class="dop">кол. человек<br>+ 100 руб.** </p>
+                    </div>
+                    <a class="order-btn button">ЗАКАЗАТЬ</a>
+                </div>
+        
+                <div class="in-order">
+                    <p>В стоимость входит:</p>
+                    <div class="row">
+                        <div class="col">
+                            <div>Простыня</div>
+                            <div>Полотенце</div>
+                            <div>Тапочки</div>
+                            <div>Джакузи</div>
+                            <div>Душ</div>
+                        </div>
+                        <div class="col">
+                            <div>Купель: 5х5 м</div>
+                            <div>Парная: 15 кв.м</div>
+                            <div>Зона отдыха: 30 кв.м</div>
+                            <div>Комната отдыха</div>
+                            <div>TV</div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="last-text">
+                    Дополнительно оплачивается: 1) *Караоке. 2) **За каждого дополнительного гостя в номерах взимается плата в размере 100 руб. с человека в час.
+                </div>
+            </div>
+        </div>
+        <div class="full-page" v-if="view_page === 'service'">
+            <div class="button-back" v-on:click="viewMainPage">
+                <img src="images/svg/back-w.svg">
+            </div>
+            <div class="slider">
+                <div class="full-page-slide slide-service">
+                    <div><img src="images/slides/slide-1.png"></div>
+                    <div><img src="images/slides/slide-2.png"></div>
+                    <div><img src="images/slides/slide-3.png"></div>
+                </div>
+        
+                <div class="sauna">
+                    <div class="header">
+                        Услуги бани
+                    </div>
+                    <div class="name">
+                        Банщик
+                    </div>
+                </div>
+        
+                <div class="price-date order no-top-padding">
+                    <div class="price">
+                        <div class="realprice">2 499 руб.</div>
+                        <div class="row-2">Стоимость услуг</div>
+                    </div>
+                    <a class="order-btn button">ЗАКАЗАТЬ</a>
+                </div>
+        
+        
+        
+                <table class="service-order">
+                    <tr class="header-row">
+                        <th colspan="2">
+                            Наименованиие
+                        </th>
+                        <th>
+                            время
+                        </th>
+                        <th>
+                            стоимость
+                        </th>
+                    </tr>
+        
+                    <tr class="item">
+                        <td>
+                            1.
+                        </td>
+                        <td>
+                            Парение классическое
+                        </td>
+                        <td>
+                            30 мин
+                        </td>
+                        <td>
+                            4 499 руб.
+                        </td>
+                    </tr>
+        
+        
+        
+                    <tr>
+                        <td class="break" colspan="5"></td>
+                    </tr>
+        
+                    <tr class="item-order">
+                        <td>
+                            <label class="container-checkbox">
+                                <input type="checkbox" checked="checked">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>
+                            Парение классическое
+                        </td>
+                        <td>
+                            30 мин
+                        </td>
+                        <td>
+                            4 499 руб.
+                        </td>
+                    </tr>
+        
+                    <tr class="item-order">
+                        <td>
+                            <label class="container-checkbox">
+                                <input type="checkbox" checked="checked">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>
+                            Парение классическое
+                        </td>
+                        <td>
+                            30 мин
+                        </td>
+                        <td>
+                            4 499 руб.
+                        </td>
+                    </tr>
+        
+                </table>
+        
+            </div>
+        </div>
+        <div class="full-page" v-if="view_page === 'store'">
+            <div class="button-back relative" v-on:click="viewMainPage">
+                <img src="images/svg/back-b.svg">
+            </div>
+            <div class="slider">
+                <div class="sauna">
+                    <div class="header">
+                        Аксессуары для бани
+                    </div>
+                </div>
+                <div class="text">
+                    Какая баня без хорошего березового или елового веника
+                </div>
+        
+                <div class="catalog">
+                    <div class="btn active">Для Мужчин</div>
+                    <div class="btn">Для Женщин</div>
+                </div>
+        
+                <div class="variable-width">
+                    <div class="good">
+                        <div class="good-wrap">
+                            <img class="good-image" src="images/good/good-1.png">
+                            <div class="good-name">
+                                Веник дубовый
+                            </div>
+                            <div class="good-price">
+                                300 руб.
+                            </div>
+                            <div class="">
+                                <div class="order">
+                                    <div class="control">
+                                        <div class="buttons">
+                                            <div class="btn decrement disabled">-</div>
+                                            <div class="result">1</div>
+                                            <div class="btn  increment">+</div>
+                                        </div>
+                                    </div>
+                                    <a class="order-btn button">ЗАКАЗАТЬ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="good">
+                        <div class="good-wrap">
+                            <img class="good-image" src="images/good/good-1.png">
+                            <div class="good-name">
+                                Веник дубовый
+                            </div>
+                            <div class="good-price">
+                                300 руб.
+                            </div>
+                            <div class="">
+                                <div class="order">
+                                    <div class="control">
+                                        <div class="buttons">
+                                            <div class="btn decrement disabled">-</div>
+                                            <div class="result">1</div>
+                                            <div class="btn  increment">+</div>
+                                        </div>
+                                    </div>
+                                    <a class="order-btn button">ЗАКАЗАТЬ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="good">
+                        <div class="good-wrap">
+                            <img class="good-image" src="images/good/good-1.png">
+                            <div class="good-name">
+                                Веник дубовый
+                            </div>
+                            <div class="good-price">
+                                300 руб.
+                            </div>
+                            <div class="">
+                                <div class="order">
+                                    <div class="control">
+                                        <div class="buttons">
+                                            <div class="btn decrement disabled">-</div>
+                                            <div class="result">1</div>
+                                            <div class="btn  increment">+</div>
+                                        </div>
+                                    </div>
+                                    <a class="order-btn button">ЗАКАЗАТЬ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="full-page" v-if="view_page === 'restaran'">
+            <div class="button-back" v-on:click="viewMainPage">
+                <img src="images/svg/back-w.svg">
+            </div>
+            <div class="slider">
+                <div class="full-page-slide restaran-menu">
+                    <div><img src="images/slides/slide-3.png"></div>
+                    <div><img src="images/slides/slide-3.png"></div>
+                </div>
+        
+                <div class="sauna one-item">
+                    <div class="header">
+                        Меню ресторанна
+                    </div>
+                </div>
+        
+                <div class="menu-block">
+                    <div class="header">Пиво</div>
+                    <div class="row">
+                        <div class="weight">0,5 л</div>
+                        <div class="name">Жигулевское барное</div>
+                        <div class="price">50 руб.</div>
+                    </div>
+                    <div class="row">
+                        <div class="weight">0,5 л</div>
+                        <div class="name">Жигулевское барное</div>
+                        <div class="price">50 руб.</div>
+                    </div>
+                    <div class="row">
+                        <div class="weight">0,5 л</div>
+                        <div class="name">Жигулевское барное</div>
+                        <div class="price">50 руб.</div>
+                    </div>
+                    <div class="row">
+                        <div class="weight">0,5 л</div>
+                        <div class="name">Жигулевское барное</div>
+                        <div class="price">50 руб.</div>
+                    </div>
+                </div>
+        
+                <div class="menu-block">
+                    <div class="header">Закуски</div>
+                    <div class="row">
+                        <div class="weight">0,5 л</div>
+                        <div class="name">Жигулевское барное</div>
+                        <div class="price">50 руб.</div>
+                    </div>
+                    <div class="row">
+                        <div class="weight">0,5 л</div>
+                        <div class="name">Жигулевское барное</div>
+                        <div class="price">50 руб.</div>
+                    </div>
+                    <div class="row">
+                        <div class="weight">0,5 л</div>
+                        <div class="name">Жигулевское барное</div>
+                        <div class="price">50 руб.</div>
+                    </div>
+                    <div class="row">
+                        <div class="weight">0,5 л</div>
+                        <div class="name">Жигулевское барное</div>
+                        <div class="price">50 руб.</div>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+        <div class="full-page" v-if="view_page === 'contacts'">
+            <div class="button-back relative" v-on:click="viewMainPage">
+                <img src="images/svg/back-b.svg">
+            </div>
+            <div class="h1 center padding-top">Как добраться</div>
+            <div class="step">
+                <b>от м.Выхино:</b> - автобус № 722  (ост. 1-я Вольская,17)<br>
+                - маршрутное такси № 722 (ост. 1-я Вольская, 17)
+            </div>
+        
+            <div class="step">
+                <b>от м.Братиславская:</b> маршрутное такси № 942<br>
+                (ост. 1-я Вольская,17)
+            </div>
+        
+            <div class="step">
+                <b>Новокосино:</b> автобус № 723 (ост. 1-я Вольская,17)
+            </div>
+        
+            <div class="step">
+                <b>Кожухово:</b> автобус № 726 (ост. 1-я Вольская,17)
+            </div>
+        
+            <div class="step">
+                <b>От ж/д ст. Люберцы:</b> маршрутное такси № 9; № 14
+            </div>
+        
+            <div class="step">
+                <b>"Новая Некрасовка"</b> (от 4-й мик.р-он Кожухово) автобус № 849 (ост. Управа р-на Некрасовка)
+            </div>
+        
+            <img src="images/map.png">
+        
+            <div class="h1 center padding-top">Контакты</div>
+            <address>
+                г. Москва, р-н Некрасовка, 1-я Вольская ул., дом. 26
+            </address>
+            <a class="phone">
+                +7 (495) 706-85-97
+            </a>
+            <div class="work-time">Режим работы: <b>круглосуточно</b></div>
+        
+            <div class="footer-menu">
+                <div class="col">
+                    <a href="#">Баня</a>
+                    <a href="#">Сауна</a>
+                    <a href="#"> Хаммам</a>
+                </div>
+                <div class="col">
+                    <a href="#">Караоке</a>
+                    <a href="#">Меню ресторана</a>
+                    <a href="#">Услуги</a>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="email">info@banynekrasovka.ru</div>
+                <div class="common">Присоединяйтесь к нам в социальных сетях</div>
+                <div class="social"><img src="images/social.png"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
 </body>
 </html>

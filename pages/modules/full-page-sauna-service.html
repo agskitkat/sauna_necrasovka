@@ -1,5 +1,5 @@
-<div class="full-page">
-    <div class="button-back">
+<div class="full-page" v-if="view_page === 'service'">
+    <div class="button-back" v-on:click="viewMainPage">
         <img src="images/svg/back-w.svg">
     </div>
     <div class="slider">
@@ -8,18 +8,6 @@
             <div><img src="images/slides/slide-2.png"></div>
             <div><img src="images/slides/slide-3.png"></div>
         </div>
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $('.slide-service').slick({
-                    arrows: false,
-                    dots: true,
-                    infinite: true,
-                    speed: 500,
-                    fade: true,
-                    cssEase: 'linear'
-                });
-            });
-        </script>
 
         <div class="sauna">
             <div class="header">
@@ -68,13 +56,18 @@
                 </td>
             </tr>
 
+
+
             <tr>
                 <td class="break" colspan="5"></td>
             </tr>
 
             <tr class="item-order">
                 <td>
-                    <input type="checkbox">
+                    <label class="container-checkbox">
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
                 </td>
                 <td>
                     Парение классическое
@@ -86,10 +79,26 @@
                     4 499 руб.
                 </td>
             </tr>
+
+            <tr class="item-order">
+                <td>
+                    <label class="container-checkbox">
+                        <input type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                </td>
+                <td>
+                    Парение классическое
+                </td>
+                <td>
+                    30 мин
+                </td>
+                <td>
+                    4 499 руб.
+                </td>
+            </tr>
+
         </table>
 
-        <div class="last-text">
-            Дополнительно оплачивается: 1) *Караоке. 2) **За каждого дополнительного гостя в номерах взимается плата в размере 100 руб. с человека в час.
-        </div>
     </div>
 </div>
