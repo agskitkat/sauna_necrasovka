@@ -12,8 +12,6 @@
     <link href="production/styles.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
 
     <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -22,10 +20,10 @@
     <script src="production/scripts.min.js"></script>
 
 </head>
-<body>
+<body ng-app="app-sauna">
     <div class="container">
-<div class="app" id="app-sauna">
-    <div class="close-content" v-if="view_content">
+<div ng-controller="pageController">
+    <div class="close-content" ng-if="view_content">
         <header>
             <div class="mobile header">
                 <div class="logo">
@@ -62,7 +60,7 @@
             </div>
             <div class="list">
         
-                <div class="list-item" v-on:click="viewPage('sauna')">
+                <div class="list-item" ng-click="viewPage('sauna')">
                     <div class="item-list-header">Выберите баню <img src="images/svg/arrow-right.svg"></div>
                     <div class="in-order">
                         <div class="in-orde-item">Баня №1 <span class="price">3 170 руб.</span></div>
@@ -70,7 +68,7 @@
                     </div>
                 </div>
         
-                <div class="list-item"  v-on:click="viewPage('service')">
+                <div class="list-item" ng-click="viewPage('service')">
                     <div class="item-list-header">Услуги бани <img src="images/svg/arrow-right.svg"></div>
                     <div class="in-order">
                         <div class="in-orde-item ">Банщик <span class="price">3 170 руб.</span></div>
@@ -78,7 +76,7 @@
                     </div>
                 </div>
         
-                <div class="list-item"  v-on:click="viewPage('store')">
+                <div class="list-item"  ng-click="viewPage('store')">
                     <div class="item-list-header">Аксессуары для бани <img src="images/svg/arrow-right.svg"></div>
                     <div class="in-order">
                         <div class="in-orde-item ">Банный веник <span class="price">3 170 руб.</span></div>
@@ -86,7 +84,7 @@
                     </div>
                 </div>
         
-                <div class="list-item"  v-on:click="viewPage('restaran')">
+                <div class="list-item"  ng-click="viewPage('restaran')">
                     <div class="item-list-header">Меню ресторана <img src="images/svg/arrow-right.svg"></div>
                     <div class="in-order">
                         <div class="in-orde-item ">Пиво <span class="price">3 170 руб.</span></div>
@@ -94,7 +92,7 @@
                     </div>
                 </div>
         
-                <div class="list-item"  v-on:click="viewPage('contacts')">
+                <div class="list-item"  ng-click="viewPage('contacts')">
                     <div class="item-list-header">Как добраться <img src="images/svg/arrow-right.svg"></div>
                     <div class="in-order">
                         <div class="in-orde-item one-string">Адрес</div>
@@ -102,8 +100,8 @@
                     </div>
                 </div>
         
-                <div class="list-item green" v-on:click="orderProcess()">
-                    <div class="item-list-header">Как добраться <img src="images/svg/arrow-right-w.svg"></div>
+                <div class="list-item green" ng-click="orderProcess()">
+                    <div class="item-list-header">Забронировать баню <img src="images/svg/arrow-right-w.svg"></div>
                     <div class="in-order">
                         <div class="in-orde-item sum">Итого <span class="price">3 170 руб.</span></div>
                     </div>
@@ -121,19 +119,25 @@
             <div class="social"><img src="images/social.png"></div>
         </footer>
     </div>
-    <div class="pages" v-if="view_pages">
-        <div class="full-page" v-if="view_page === 'sauna'">
-            <div class="button-back" v-on:click="viewMainPage">
+    <div class="pages" ng-if="view_pages">
+        <div class="full-page" ng-if="view_page === 'sauna'">
+            <div class="button-back" ng-click="viewMainPage()">
                 <img src="images/svg/back-w.svg">
             </div>
             <div class="slider">
-                <div class="full-page-slide sauna-slide">
+                <slick class="full-page-slide sauna-slide"
+                       variable-width="true"
+                       arrows="false"
+                       dots="true"
+                       slides-to-show="1"
+                       infinite="true"
+                       speed="500"
+                >
                     <div><img src="images/slides/slide-1.png"></div>
                     <div><img src="images/slides/slide-2.png"></div>
                     <div><img src="images/slides/slide-3.png"></div>
-                </div>
+                </slick>
         
-                
                 <div class="sauna">
                     <div class="header">
                         Интерьеры бани
@@ -195,16 +199,22 @@
                 </div>
             </div>
         </div>
-        <div class="full-page" v-if="view_page === 'service'">
-            <div class="button-back" v-on:click="viewMainPage">
+        <div class="full-page" ng-if="view_page === 'service'">
+            <div class="button-back" ng-click="viewMainPage()">
                 <img src="images/svg/back-w.svg">
             </div>
             <div class="slider">
-                <div class="full-page-slide slide-service">
+                <slick class="full-page-slide sauna-slide"
+                       variable-width="true"
+                       arrows="false"
+                       dots="true"
+                       slides-to-show="1"
+                       infinite="true"
+                       speed="500">
                     <div><img src="images/slides/slide-1.png"></div>
                     <div><img src="images/slides/slide-2.png"></div>
                     <div><img src="images/slides/slide-3.png"></div>
-                </div>
+                </slick>
         
                 <div class="sauna">
                     <div class="header">
@@ -299,8 +309,8 @@
         
             </div>
         </div>
-        <div class="full-page" v-if="view_page === 'store'">
-            <div class="button-back relative" v-on:click="viewMainPage">
+        <div class="full-page" ng-if="view_page === 'store'">
+            <div class="button-back relative" ng-click="viewMainPage()">
                 <img src="images/svg/back-b.svg">
             </div>
             <div class="slider">
@@ -318,7 +328,13 @@
                     <div class="btn">Для Женщин</div>
                 </div>
         
-                <div class="variable-width">
+                <slick class="variable-width"
+                       variable-width="true"
+                       arrows="false"
+                       dots="false"
+                       slides-to-Show="1"
+                       infinite="true"
+                       speed="500">
                     <div class="good">
                         <div class="good-wrap">
                             <img class="good-image" src="images/good/good-1.png">
@@ -390,18 +406,25 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </slick>
+        
             </div>
         </div>
-        <div class="full-page" v-if="view_page === 'restaran'">
-            <div class="button-back" v-on:click="viewMainPage">
+        <div class="full-page" ng-if="view_page === 'restaran'">
+            <div class="button-back" ng-click="viewMainPage()">
                 <img src="images/svg/back-w.svg">
             </div>
             <div class="slider">
-                <div class="full-page-slide restaran-menu">
+                <slick class="full-page-slide restaran-menu"
+                       variable-width="true"
+                       arrows="false"
+                       dots="false"
+                       slides-to-show="1"
+                       infinite="true"
+                       speed="500">
                     <div><img src="images/slides/slide-3.png"></div>
                     <div><img src="images/slides/slide-3.png"></div>
-                </div>
+                </slick>
         
                 <div class="sauna one-item">
                     <div class="header">
@@ -459,8 +482,8 @@
         
             </div>
         </div>
-        <div class="full-page" v-if="view_page === 'contacts'">
-            <div class="button-back relative" v-on:click="viewMainPage">
+        <div class="full-page" ng-if="view_page === 'contacts'">
+            <div class="button-back relative" ng-click="viewMainPage()">
                 <img src="images/svg/back-b.svg">
             </div>
             <div class="h1 center padding-top">Как добраться</div>

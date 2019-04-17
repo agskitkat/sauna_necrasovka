@@ -1,13 +1,19 @@
-<div class="full-page" v-if="view_page === 'service'">
-    <div class="button-back" v-on:click="viewMainPage">
+<div class="full-page" ng-if="view_page === 'service'">
+    <div class="button-back" ng-click="viewMainPage()">
         <img src="images/svg/back-w.svg">
     </div>
     <div class="slider">
-        <div class="full-page-slide slide-service">
+        <slick class="full-page-slide sauna-slide"
+               variable-width="true"
+               arrows="false"
+               dots="true"
+               slides-to-show="1"
+               infinite="true"
+               speed="500">
             <div><img src="images/slides/slide-1.png"></div>
             <div><img src="images/slides/slide-2.png"></div>
             <div><img src="images/slides/slide-3.png"></div>
-        </div>
+        </slick>
 
         <div class="sauna">
             <div class="header">

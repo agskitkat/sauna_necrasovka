@@ -42,9 +42,9 @@ gulp.task('html:watch', function () {
 
 gulp.task('js', function () {
     gulp.src(['js/libs/*.js', 'js/*.js'])
-        .pipe(uglify().on('error', function(e){
-            console.log(e);
-        }))
+        //.pipe(uglify().on('error', function(e){
+         //   console.log(e);
+        //}))
         .pipe(concat('scripts.min.js'))
         .pipe(gulp.dest('production'));
 });

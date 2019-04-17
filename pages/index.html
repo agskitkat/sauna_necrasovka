@@ -1,13 +1,13 @@
 //= modules/header.html
-<div class="app" id="app-sauna">
-    <div class="close-content" v-if="view_content">
+<div ng-controller="pageController">
+    <div class="close-content" ng-if="view_content">
         //= modules/menu.html
         //= modules/banner.html
         //= modules/seo-text.html
         //= modules/order-list.html
         //= modules/footer-block.html
     </div>
-    <div class="pages" v-if="view_pages">
+    <div class="pages" ng-if="view_pages">
         //= modules/full-page-sauna.html
         //= modules/full-page-sauna-service.html
         //= modules/full-page-sauna-store.html

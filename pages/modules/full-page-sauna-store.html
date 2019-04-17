@@ -1,5 +1,5 @@
-<div class="full-page" v-if="view_page === 'store'">
-    <div class="button-back relative" v-on:click="viewMainPage">
+<div class="full-page" ng-if="view_page === 'store'">
+    <div class="button-back relative" ng-click="viewMainPage()">
         <img src="images/svg/back-b.svg">
     </div>
     <div class="slider">
@@ -17,7 +17,13 @@
             <div class="btn">Для Женщин</div>
         </div>
 
-        <div class="variable-width">
+        <slick class="variable-width"
+               variable-width="true"
+               arrows="false"
+               dots="false"
+               slides-to-Show="1"
+               infinite="true"
+               speed="500">
             <div class="good">
                 <div class="good-wrap">
                     <img class="good-image" src="images/good/good-1.png">
@@ -89,6 +95,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </slick>
+
     </div>
 </div>

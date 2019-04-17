@@ -4,7 +4,7 @@
     </div>
     <div class="list">
 
-        <div class="list-item" v-on:click="viewPage('sauna')">
+        <div class="list-item" ng-click="viewPage('sauna')">
             <div class="item-list-header">Выберите баню <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
                 <div class="in-orde-item">Баня №1 <span class="price">3 170 руб.</span></div>
@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <div class="list-item"  v-on:click="viewPage('service')">
+        <div class="list-item" ng-click="viewPage('service')">
             <div class="item-list-header">Услуги бани <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
                 <div class="in-orde-item ">Банщик <span class="price">3 170 руб.</span></div>
@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <div class="list-item"  v-on:click="viewPage('store')">
+        <div class="list-item"  ng-click="viewPage('store')">
             <div class="item-list-header">Аксессуары для бани <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
                 <div class="in-orde-item ">Банный веник <span class="price">3 170 руб.</span></div>
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="list-item"  v-on:click="viewPage('restaran')">
+        <div class="list-item"  ng-click="viewPage('restaran')">
             <div class="item-list-header">Меню ресторана <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
                 <div class="in-orde-item ">Пиво <span class="price">3 170 руб.</span></div>
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div class="list-item"  v-on:click="viewPage('contacts')">
+        <div class="list-item"  ng-click="viewPage('contacts')">
             <div class="item-list-header">Как добраться <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
                 <div class="in-orde-item one-string">Адрес</div>
@@ -44,8 +44,8 @@
             </div>
         </div>
 
-        <div class="list-item green" v-on:click="orderProcess()">
-            <div class="item-list-header">Как добраться <img src="images/svg/arrow-right-w.svg"></div>
+        <div class="list-item green" ng-click="orderProcess()">
+            <div class="item-list-header">Забронировать баню <img src="images/svg/arrow-right-w.svg"></div>
             <div class="in-order">
                 <div class="in-orde-item sum">Итого <span class="price">3 170 руб.</span></div>
             </div>
