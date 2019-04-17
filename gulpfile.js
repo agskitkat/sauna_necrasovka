@@ -31,12 +31,12 @@ gulp.task('sass:watch', function () {
 
 
 gulp.task('html', function () {
-    gulp.src(['pages/*.html', 'pages/account/*.html'])
+    gulp.src(['pages/*.html', 'pages/modal/*.html'])
         .pipe(rigger())
         .pipe(gulp.dest(''));
 });
 gulp.task('html:watch', function () {
-    gulp.watch(['pages/*.html','pages/modules/*.html', 'pages/account/*.html'], ['html']);
+    gulp.watch(['pages/*.html','pages/modules/*.html', 'pages/modal/*.html'], ['html']);
 });
 
 

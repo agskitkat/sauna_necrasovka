@@ -3,7 +3,7 @@ var app = angular.module("app-sauna", ['slick']);
 
 app.factory('tablesheet', function(){
     return {
-        get: function(date) {
+        get: function() {
 
         }
     }
@@ -13,6 +13,17 @@ app.controller("pageController", function($scope) {
     $scope.view_page = "";
     $scope.view_content = true;
     $scope.view_pages = false;
+
+    $scope.pickerDateTime = {
+        y:0,
+        m:0,
+        d:0,
+        hs:0,
+        he:0,
+        mounth: [
+              
+        ]
+    };
 
     $scope.order = {
         sauna: {
