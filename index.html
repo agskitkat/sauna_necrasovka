@@ -124,13 +124,24 @@
                 <div class="date-picker">
                     <div class="date">
                         <div class="control">
-                            <img src="images/svg/arrow-blue-right.svg" class="arrow">
+                            <img src="images/svg/arrow-blue-right.svg" class="arrow deg180">
                             <div class="now">{{ pickerDateTime.m }} {{ pickerDateTime.y }}</div>
-                            <img src="images/svg/arrow-blue-right.svg" class="arrow deg90">
+                            <img src="images/svg/arrow-blue-right.svg" class="arrow">
                         </div>
         
                         <div class="dates">
-        
+                            <div class="table">
+                                <div class="weeks">
+                                    <span>пн</span>
+                                    <span>вт</span>
+                                    <span>ср</span>
+                                    <span>чт</span>
+                                    <span>пт</span>
+                                    <span class="red">сб</span>
+                                    <span class="red">вс</span>
+                                    <span class="day {{ (day.weekend)?'red':'' }}" ng-repeat="day in pickerDateTime.month">{{day.num}}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="time">
