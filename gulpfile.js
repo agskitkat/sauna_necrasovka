@@ -36,7 +36,7 @@ gulp.task('html', function () {
         .pipe(gulp.dest(''));
 });
 gulp.task('html:watch', function () {
-    gulp.watch(['pages/*.html','pages/modules/*.html', 'pages/modal/*.html'], ['html']);
+    gulp.watch(['pages/*.html','pages/modules/*.html', 'pages/modules/modal/*.html'], ['html']);
 });
 
 

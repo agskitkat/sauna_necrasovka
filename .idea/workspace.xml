@@ -15,16 +15,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sass/modules/full-page-layout.scss">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/app.js">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="1802">
               <caret line="106" column="24" selection-start-line="106" selection-start-column="24" selection-end-line="106" selection-end-column="24" />
+=======
+            <state relative-caret-position="272">
+              <caret line="16" column="48" lean-forward="true" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+>>>>>>> b515273b09acfd86d643f97dc7fe0cbed35b3e43
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/sass/modules/modal.scss">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
@@ -38,6 +44,21 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="391">
               <caret line="23" column="14" selection-start-line="23" selection-start-column="14" selection-end-line="23" selection-end-column="14" />
+=======
+        <entry file="file://$PROJECT_DIR$/pages/modules/modal/datepicker.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+>>>>>>> b515273b09acfd86d643f97dc7fe0cbed35b3e43
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gulpfile.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="714">
+              <caret line="42" column="29" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -45,26 +66,27 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sass/modules/date-picker.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="14" selection-start-column="14" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pages/modules/modal/datepicker.html">
-          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="697">
               <caret line="41" column="57" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="57" />
+=======
+            <state relative-caret-position="34">
+              <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+>>>>>>> b515273b09acfd86d643f97dc7fe0cbed35b3e43
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/index.html">
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/modules/header.html">
+>>>>>>> b515273b09acfd86d643f97dc7fe0cbed35b3e43
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+            <state relative-caret-position="136">
+              <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -119,7 +141,6 @@
         <option value="$PROJECT_DIR$/js/lib/vue-slick.js" />
         <option value="$PROJECT_DIR$/js/lib/angularjs.js" />
         <option value="$PROJECT_DIR$/pages/modules/order-list.html" />
-        <option value="$PROJECT_DIR$/pages/modules/header.html" />
         <option value="$PROJECT_DIR$/pages/modules/full-page-sauna-contacts.html" />
         <option value="$PROJECT_DIR$/js/libs/angularjs-slick.js" />
         <option value="$PROJECT_DIR$/pages/modules/full-page-sauna-store.html" />
@@ -133,16 +154,21 @@
         <option value="$PROJECT_DIR$/pages/modules/footer.html" />
         <option value="$PROJECT_DIR$/sass/modules/modal.scss" />
         <option value="$PROJECT_DIR$/sass/stack.scss" />
-        <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/pages/index.html" />
-        <option value="$PROJECT_DIR$/sass/modules/date-picker.scss" />
+        <option value="$PROJECT_DIR$/pages/modules/header.html" />
+        <option value="$PROJECT_DIR$/gulpfile.js" />
         <option value="$PROJECT_DIR$/pages/modules/modal/datepicker.html" />
+        <option value="$PROJECT_DIR$/sass/modules/date-picker.scss" />
         <option value="$PROJECT_DIR$/js/app.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< HEAD
     <option name="x" value="47" />
+=======
+    <option name="x" value="266" />
+>>>>>>> b515273b09acfd86d643f97dc7fe0cbed35b3e43
     <option name="y" value="-8" />
     <option name="width" value="1296" />
     <option name="height" value="1040" />
@@ -163,24 +189,7 @@
             <path>
               <item name="sauna_necrasovka" type="b2602c69:ProjectViewProjectNode" />
               <item name="sauna_necrasovka" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sauna_necrasovka" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sauna_necrasovka" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-              <item name="svg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sauna_necrasovka" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sauna_necrasovka" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sauna_necrasovka" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sauna_necrasovka" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-              <item name="libs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sauna_necrasovka" type="b2602c69:ProjectViewProjectNode" />
@@ -203,13 +212,7 @@
             <path>
               <item name="sauna_necrasovka" type="b2602c69:ProjectViewProjectNode" />
               <item name="sauna_necrasovka" type="462c0819:PsiDirectoryNode" />
-              <item name="sass" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="sauna_necrasovka" type="b2602c69:ProjectViewProjectNode" />
-              <item name="sauna_necrasovka" type="462c0819:PsiDirectoryNode" />
-              <item name="sass" type="462c0819:PsiDirectoryNode" />
-              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -222,7 +225,11 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/node_modules/gulp" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../sauna_necrasovka_desktop" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+>>>>>>> b515273b09acfd86d643f97dc7fe0cbed35b3e43
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -286,25 +293,39 @@
       <workItem from="1555485364228" duration="13259000" />
       <workItem from="1555519638806" duration="1021000" />
       <workItem from="1555521531602" duration="5843000" />
+<<<<<<< HEAD
       <workItem from="1555562770387" duration="333000" />
       <workItem from="1555865577229" duration="505000" />
       <workItem from="1555866125070" duration="10000" />
+=======
+      <workItem from="1555664646289" duration="4966000" />
+>>>>>>> b515273b09acfd86d643f97dc7fe0cbed35b3e43
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="56501000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="916" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.114245415" />
+=======
+    <option name="totallyTimeSpent" value="69218000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1096" height="1896" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.24952741" />
+>>>>>>> b515273b09acfd86d643f97dc7fe0cbed35b3e43
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Gulp" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20945083" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20930232" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -448,13 +469,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/modules/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/modules/full-page-sauna-contacts.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -520,6 +534,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/pages/modules/order-list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="497">
@@ -527,6 +542,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> b515273b09acfd86d643f97dc7fe0cbed35b3e43
     <entry file="file://$PROJECT_DIR$/sass/stack.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -541,6 +558,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/gulpfile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -549,6 +567,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sass/modules/full-page-layout.scss">
+=======
+    <entry file="file://$PROJECT_DIR$/pages/index.html">
+>>>>>>> b515273b09acfd86d643f97dc7fe0cbed35b3e43
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1802">
           <caret line="106" column="24" selection-start-line="106" selection-start-column="24" selection-end-line="106" selection-end-column="24" />
@@ -569,24 +590,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sass/modules/date-picker.scss">
+    <entry file="file://$PROJECT_DIR$/sass/modules/full-page-layout.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="14" selection-start-column="14" selection-end-column="14" />
+        <state relative-caret-position="528">
+          <caret line="105" column="24" selection-start-line="105" selection-start-column="24" selection-end-line="105" selection-end-column="24" />
+          <folding>
+            <element signature="e#2255#3059#0" />
+            <element signature="e#3073#3403#0" />
+            <element signature="e#3423#3474#0" />
+            <element signature="e#3493#4363#0" />
+            <element signature="e#4378#4444#0" />
+            <element signature="e#4454#4502#0" />
+            <element signature="e#4515#4880#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/modules/order-list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" column="59" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/modules/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gulpfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="42" column="29" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/modules/modal/datepicker.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="697">
           <caret line="41" column="57" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="57" />
+=======
+        <state relative-caret-position="34">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sass/modules/date-picker.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+>>>>>>> b515273b09acfd86d643f97dc7fe0cbed35b3e43
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/index.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="170">
           <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+=======
+        <state relative-caret-position="272">
+          <caret line="16" column="48" lean-forward="true" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+>>>>>>> b515273b09acfd86d643f97dc7fe0cbed35b3e43
         </state>
       </provider>
     </entry>
