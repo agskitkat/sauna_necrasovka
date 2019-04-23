@@ -9,6 +9,43 @@ app.factory('tablesheet', function(){
     }
 });
 
+
+app.factory('services', function(){
+    return {
+        get: function() {
+            return [
+                {
+                    name: "Банщик",
+                    services: [
+                        {
+                            name: "Парение классическое",
+                            time: "30 мин",
+                            price: 4499
+                        },{
+                            name: "Парение",
+                            time: "45 мин",
+                            price: 1499
+                        }
+                    ]
+                },{
+                    name: "Массажист",
+                    services: [
+                        {
+                            name: "Парение классическое",
+                            time: "30 мин",
+                            price: 4499
+                        },{
+                            name: "Парение",
+                            time: "45 мин",
+                            price: 1499
+                        }
+                    ]
+                }
+            ];
+        }
+    }
+});
+
 app.controller("pageController", function($scope) {
     $scope.view_page = "";
     $scope.view_content = true;
@@ -21,7 +58,9 @@ app.controller("pageController", function($scope) {
             guest:1,
         },
         service: [
-            "service-1", "service-2"
+            {
+                id: "service1"
+            }
         ],
         store: [
             {id: 1, count: 3},
@@ -46,14 +85,10 @@ app.controller("pageController", function($scope) {
 
     $scope.pickdate = function(data) {
         console.log("pickDate", data);
-    }
+    };
 
 
     $scope.orderProcess = function() {
 
-    }
-
-    $scope.allowedTime = [
-        1,2,3
-    ];
+    };
 });
