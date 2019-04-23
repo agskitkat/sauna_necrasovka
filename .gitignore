@@ -1,4 +1,7 @@
 
 node_modules
+<<<<<<< HEAD
 production/scripts.min.js
+=======
+>>>>>>> 9563893a01765ea6a8ae2e6ed9929028f5a3840c
 .idea/workspace.xml
