@@ -20,7 +20,9 @@
       .weeks {
         display:flex;
         flex-wrap: wrap;
-
+        .day {
+          cursor: pointer;
+        }
         span {
           text-align: center;
           padding:5px 3px;
@@ -29,8 +31,24 @@
         .red {
           color:#AA0000;
         }
+        .now {
+          font-weight: bold;
+        }
+        .past {
+          opacity: 0.5;
+        }
+        .selected {
+          border:1px solid #EA526C;
+          border-radius: 5px;
+          margin:-1px;
+        }
       }
     }
+  }
+  .today {
+    cursor:pointer;
+    text-align: center;
+    display:none;
   }
 }
 
