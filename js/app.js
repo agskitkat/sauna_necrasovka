@@ -17,7 +17,7 @@ app.directive("datatime", function() {
         link: function($scope, element, attrs) {
             $scope.toMonth = function(intMonth){
               var arMonthName = [
-                  "Январь", "Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Ноябрь","Декабрь"
+                  "Январь", "Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"
               ];
               return arMonthName[intMonth];
             };

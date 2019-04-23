@@ -1,2 +1,4 @@
 
 node_modules
+production/scripts.min.js
+.idea/workspace.xml
