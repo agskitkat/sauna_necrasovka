@@ -7,7 +7,7 @@
         <div class="list-item" ng-click="viewPage('sauna')">
             <div class="item-list-header">Выберите баню <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
-                <div class="in-orde-item">Баня №1 <span class="price">3 170 руб.</span></div>
+                <div class="in-orde-item">{{ current_sauna.sauna.name }} <span class="price">{{ current_sauna.sauna.price }} руб.</span></div>
                 <div class="date">14.04.2019 г - 19:00 - 23:00</div>
             </div>
         </div>
@@ -15,8 +15,7 @@
         <div class="list-item" ng-click="viewPage('service')">
             <div class="item-list-header">Услуги бани <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
-                <div class="in-orde-item ">Банщик <span class="price">3 170 руб.</span></div>
-                <div class="in-orde-item ">Массажист <span class="price">2 170 руб.</span></div>
+                <div class="in-orde-item " ng-repeat="service in order.service">{{ service.id }} <span class="price">{{ service.price }} руб.</span></div>
             </div>
         </div>
 

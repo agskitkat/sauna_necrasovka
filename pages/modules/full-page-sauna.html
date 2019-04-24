@@ -19,7 +19,7 @@
             <div class="header">
                 Интерьеры бани
             </div>
-            <div class="name">
+            <div class="name" ng-click="showChooseSauna()">
                 Баня №1
             </div>
         </div>
@@ -29,7 +29,7 @@
                 <div class="realprice">1 499 руб./час</div>
                 <div class="row-2">мин. заказ 2 часа</div>
             </div>
-            <div class="date">
+            <div class="date" ng-click="showDatePicker()">
                 <div class="row-1">
                     <img src="images/svg/timetable-b.svg"> 19.04.2019
                 </div>
@@ -42,13 +42,13 @@
         <div class="order">
             <div class="control">
                 <div class="buttons">
-                    <div class="btn decrement disabled">-</div>
-                    <div class="result">1</div>
-                    <div class="btn  increment">+</div>
+                    <div class="btn decrement disabled" ng-click="saunaMansCount(-1)">-</div>
+                    <div class="result">{{ order.sauna.guest }}</div>
+                    <div class="btn  increment" ng-click="saunaMansCount(1)">+</div>
                 </div>
                 <p class="dop">кол. человек<br>+ 100 руб.** </p>
             </div>
-            <a class="order-btn button">ЗАКАЗАТЬ</a>
+            <a class="order-btn button" ng-click="buttonOrderSauna()">ЗАКАЗАТЬ</a>
         </div>
 
         <div class="in-order">
