@@ -63,15 +63,16 @@
                 <div class="list-item" ng-click="viewPage('sauna')">
                     <div class="item-list-header">Выберите баню <img src="images/svg/arrow-right.svg"></div>
                     <div class="in-order">
-                        <div class="in-orde-item">{{ current_sauna.sauna.name }} <span class="price">{{ current_sauna.sauna.price }} руб.</span></div>
-                        <div class="date">14.04.2019 г - 19:00 - 23:00</div>
+                        <div class="in-orde-item">{{ order.sauna.name }} <span class="price">{{ currency(order.sauna.price, "RUB") }}</span></div>
+                        <div class="date">{{ viewTime(order.sauna.datetime) }}</div>
                     </div>
                 </div>
         
                 <div class="list-item" ng-click="viewPage('service')">
                     <div class="item-list-header">Услуги бани <img src="images/svg/arrow-right.svg"></div>
                     <div class="in-order">
-                        <div class="in-orde-item " ng-repeat="service in order.service">{{ service.id }} <span class="price">{{ service.price }} руб.</span></div>
+                        <div class="in-orde-item" ng-if="order.service.length" ng-repeat="service in order.service">{{ service.id }} <span class="price">{{ service.price }} руб.</span></div>
+                        <div class="in-orde-item" ng-if="!order.service.length">Дополнительные банные услуги</div>
                     </div>
                 </div>
         
