@@ -11,7 +11,7 @@ app.factory('tablesheet', function(){
     }
 });
 
-app.factory('sauna-list', function(){
+app.factory('$saunalist', function(){
     return {
         get: function() {
             return [
@@ -32,7 +32,7 @@ app.factory('sauna-list', function(){
     }
 });
 
-app.factory('services', function(){
+app.factory('$services', function(){
     return {
         get: function() {
             return [
@@ -74,10 +74,12 @@ app.factory('services', function(){
     }
 });
 
-app.controller("pageController", function($scope) {
+app.controller("pageController", function($scope, $saunalist) {
     $scope.view_page = "";
     $scope.view_content = true;
     $scope.view_pages = false;
+
+    $scope.sauna_list = $saunalist;
 
     $scope.current_sauna = {
         id: 1,
@@ -88,6 +90,8 @@ app.controller("pageController", function($scope) {
         guest:1,
         price:0
     };
+
+
 
     $scope.order = {
         sauna: {
@@ -125,11 +129,7 @@ app.controller("pageController", function($scope) {
     };
 
 
-    $scope.getServiceName = function(id){
-
-    };
-
-
+    
     $scope.calcOrderSum = function() {
         // Calc sauna
     };
@@ -154,7 +154,13 @@ app.controller("pageController", function($scope) {
     };
 
 
+    // SERVICE
+    $scope.getServiceName = function(id){
 
+    };
+
+
+    // PAGES
     $scope.viewPage = function(view_page) {
         $scope.view_page = view_page;
         $scope.view_content = false;
@@ -166,6 +172,9 @@ app.controller("pageController", function($scope) {
         $scope.view_content = true;
         $scope.view_pages =  false;
     };
+
+
+
 
 
     $scope.pickdate = function(data) {
