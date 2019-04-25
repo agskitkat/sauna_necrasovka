@@ -7,7 +7,7 @@
         <div class="list-item" ng-click="viewPage('sauna')">
             <div class="item-list-header">Выберите баню <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
-                <div class="in-orde-item">{{ order.sauna.name }} <span class="price">{{ currency(order.sauna.price, "RUB") }}</span></div>
+                <div class="in-orde-item">{{ order.sauna.name }} <span class="price">{{ currency(order.sauna.price) }}</span></div>
                 <div class="date">{{ viewTime(order.sauna.datetime) }}</div>
             </div>
         </div>

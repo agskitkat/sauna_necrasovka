@@ -1,10 +1,11 @@
-
 app.directive("datatime", function() {
     return {
         restrict: 'E',
         scope: {
             //коллбэк добавления нового элемента
-            pickDateController: '='
+            pickDateController: '=',
+            closeDateModal: "=",
+            minOrderHours: "="
         },
         link: function($scope, element, attrs) {
             $scope.toMonth = function(intMonth){
@@ -144,6 +145,7 @@ app.directive("datatime", function() {
         template: '<div class="date-picker">\n' +
             '            <div class="date">\n' +
             '                <div class="control">\n' +
+            '                    <div class="close" ng-click="closeDateModal()"><img src="images/svg/close.svg"></div>\n'+
             '                    <img src="images/svg/arrow-blue-right.svg" class="arrow deg180" ng-click="month(-1)">\n' +
             '                    <div class="now">{{ toMonth(current_month) }} {{ current_year }}</div>\n' +
             '                    <img src="images/svg/arrow-blue-right.svg" class="arrow" ng-click="month(1)">\n' +
@@ -165,9 +167,15 @@ app.directive("datatime", function() {
             '                </div>\n' +
             '            </div>\n' +
             '            <div class="time">\n' +
-            '                          \n' +
+            '                <div class="header">' +
+            '                       Свободное ' +
+            '                   <div>минимальный заказ: {{ minOrderHours }} часа</div>' +
+            '                </div>          \n' +
             '            </div>\n' +
-            '            <span class="today" ng-click="todayView()">Сегодня</span>\n'+
+            '            <span class="today" ng-click="todayView()">Сегодня</span>\n' +
+            '            <div class="hours">' +
+            '               <div class="hour">{{}}</div>   ' +
+        '                </div>'+
             '        </div>'
     }
 });

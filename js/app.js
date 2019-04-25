@@ -4,9 +4,7 @@ var app = angular.module("app-sauna", ['slick']);
 app.factory('tablesheet', function(){
     return {
         get: function() {
-            {
 
-            }
         }
     }
 });
@@ -16,15 +14,77 @@ app.factory('$saunalist', function(){
         get: function() {
             return [
                 {
+                    choose:true,
                     id: "1",
                     name: "Сауна №1",
                     price: 1499,
                     min_h: 3,
-                    max_guest:4,
+                    max_guest:2,
                     guest_overprice:100,
                     options: [
                         "Простыня","Полотенце","Тапочки","Джакузи","Душ","Купель: 5х5 м",
                         "Парная: 15 кв.м","Зона отдыха: 30 кв.м","Комната отдыха","TV"
+                    ],
+                    images:[
+                      "images/slides/slide-1.png","images/slides/slide-2.png","images/slides/slide-3.png"
+                    ],
+                },{
+                    id: "2",
+                    name: "Сауна №2",
+                    price: 3500,
+                    min_h: 2,
+                    max_guest:3,
+                    guest_overprice:150,
+                    options: [
+                        "Простыня","Полотенце",
+                        "Парная: 15 кв.м","Зона отдыха: 30 кв.м","Комната отдыха","TV"
+                    ],
+                    images:[
+                        "images/slides/slide-1.png","images/slides/slide-2.png","images/slides/slide-3.png"
+                    ],
+                },{
+                    id: "3",
+                    name: "Сауна №3",
+                    price: 1000,
+                    min_h: 2,
+                    max_guest:5,
+                    guest_overprice:100,
+                    options: [
+                        "Простыня","Полотенце","Тапочки","Джакузи","Душ","Купель: 5х5 м",
+                        "Парная: 15 кв.м"
+                    ],
+                    images:[
+                        "images/slides/slide-1.png","images/slides/slide-2.png","images/slides/slide-3.png"
+                    ],
+                },{
+                    id: "4",
+                    vip: true,
+                    name: "Сауна №4",
+                    price: 1590,
+                    min_h: 4,
+                    max_guest:6,
+                    guest_overprice:300,
+                    options: [
+                        "Простыня","Полотенце","Тапочки","Джакузи","Душ","Купель: 5х5 м",
+                        "Парная: 15 кв.м","Зона отдыха: 30 кв.м"
+                    ],
+                    images:[
+                        "images/slides/slide-1.png","images/slides/slide-2.png","images/slides/slide-3.png"
+                    ],
+                },{
+                    id: "5",
+                    vip: true,
+                    name: "Сауна №5",
+                    price: 8900,
+                    min_h: 4,
+                    max_guest:9,
+                    guest_overprice:200,
+                    options: [
+                        "Простыня","Полотенце","Тапочки","Джакузи","Душ","Купель: 5х5 м",
+                        "Парная: 15 кв.м","Зона отдыха: 30 кв.м","Комната отдыха","TV"
+                    ],
+                    images:[
+                        "images/slides/slide-1.png","images/slides/slide-3.png"
                     ],
                 }
             ]
@@ -79,7 +139,10 @@ app.controller("pageController", function($scope, $saunalist) {
     $scope.view_content = true;
     $scope.view_pages = false;
 
+    $scope.sliderOn = true;
+
     $scope.sauna_list = $saunalist.get();
+    $scope.sauna_choose = $scope.sauna_list[0];
 
     $scope.order = {
         sauna: {
@@ -122,11 +185,15 @@ app.controller("pageController", function($scope, $saunalist) {
         sum: 100500
     };
 
+    $scope.free_sapace_today = [
+
+    ];
 
 
     $scope.calcOrderSum = function() {
         // Calc sauna
     };
+
 
     // SAUNA
     $scope.viewTime = function(dt){
@@ -141,23 +208,61 @@ app.controller("pageController", function($scope, $saunalist) {
             return "Некорректная дата";
         }
     };
+
+    $scope.booleanChooseSauna = false;
     $scope.showChooseSauna = function () {
+        $scope.booleanChooseSauna = true;
+    };
+    $scope.chooseSauna = function (sauna) {
+        $scope.sliderOn = false;
+        angular.forEach($scope.sauna_list, function(value, key) {
+            value.choose = false;
+        });
+        sauna.choose = true;
+        $scope.sauna_choose = sauna;
+        $scope.booleanChooseSauna = false;
+
+        setTimeout(function(){
+            $scope.sliderOn = true;
+            $scope.$apply();
+        },0);
+
 
     };
-    $scope.chooseSauna = function () {
-
+    $scope.closeChooseSauna = function(){
+        $scope.booleanChooseSauna = false;
     };
-    $scope.showDatePicker = function () {
 
+
+    // SAUNA PICK DATE
+    $scope.booleanChooseDATE = false;
+    $scope.showChooseDATE = function () {
+        $scope.booleanChooseDATE = true;
     };
+    $scope.chooseDATE = function () {
+        $scope.booleanChooseDATE = false;
+    };
+    $scope.closeChooseDATE = function(){
+        $scope.booleanChooseDATE = false;
+    };
+    $scope.closemodal = function() {
+        $scope.booleanChooseDATE = false;
+    };
+    $scope.pickdate = function(data) {
+        console.log("pickDate", data);
+    };
+
+    // ORDER SAUNA CONTROL
     $scope.saunaMansCount = function(derection) {
         if( ($scope.order.sauna.guest + derection)  >= 1) {
-
+            $scope.order.sauna.guest += derection;
         }
     };
     $scope.buttonOrderSauna = function() {
 
     };
+
+
 
 
     // SERVICE
@@ -171,6 +276,14 @@ app.controller("pageController", function($scope, $saunalist) {
         $scope.view_page = view_page;
         $scope.view_content = false;
         $scope.view_pages =  true;
+
+        $scope.booleanChooseSauna = false;
+
+        switch(view_page) {
+            case "":
+
+            break;
+        }
     };
 
     $scope.viewMainPage = function(view_page) {
@@ -180,12 +293,6 @@ app.controller("pageController", function($scope, $saunalist) {
     };
 
 
-
-
-
-    $scope.pickdate = function(data) {
-        console.log("pickDate", data);
-    };
 
 
     $scope.orderProcess = function() {
