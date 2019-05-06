@@ -3,8 +3,19 @@ var app = angular.module("app-sauna", ['slick']);
 
 app.factory('tablesheet', function(){
     return {
-        get: function() {
-
+        get: function(sauna_id, date) {
+            return [
+                {
+                    s: 10,
+                    e: 13
+                },{
+                    s: 14,
+                    e: 16
+                },{
+                    s: 18,
+                    e: 22
+                }
+            ]
         }
     }
 });
@@ -258,8 +269,8 @@ app.controller("pageController", function($scope, $saunalist) {
             $scope.order.sauna.guest += derection;
         }
     };
-    $scope.buttonOrderSauna = function() {
-
+    $scope.buttonOrderSauna = function(sauna_choose) {
+        console.log(sauna_choose);
     };
 
 

@@ -5,7 +5,8 @@ app.directive("datatime", function() {
             //коллбэк добавления нового элемента
             pickDateController: '=',
             closeDateModal: "=",
-            minOrderHours: "="
+            minOrderHours: "=",
+            saunaId: "="
         },
         link: function($scope, element, attrs) {
             $scope.toMonth = function(intMonth){
@@ -141,6 +142,12 @@ app.directive("datatime", function() {
                 };
             };
 
+            $scope.hours = function() {
+                var hours = [];
+
+                return hours;
+            }
+
         },
         template: '<div class="date-picker">\n' +
             '            <div class="date">\n' +
@@ -168,14 +175,14 @@ app.directive("datatime", function() {
             '            </div>\n' +
             '            <div class="time">\n' +
             '                <div class="header">' +
-            '                       Свободное ' +
-            '                   <div>минимальный заказ: {{ minOrderHours }} часа</div>' +
+            '                       Свободное время ' +
+            '                   <div class="info">минимальный заказ: {{ minOrderHours }} часа</div>' +
             '                </div>          \n' +
+            '                <div class="hours" ng-repeat="hour in hours">' +
+            '                   <div class="hour">{{}}</div>   ' +
+            '                </div>'+
             '            </div>\n' +
             '            <span class="today" ng-click="todayView()">Сегодня</span>\n' +
-            '            <div class="hours">' +
-            '               <div class="hour">{{}}</div>   ' +
-        '                </div>'+
             '        </div>'
     }
 });

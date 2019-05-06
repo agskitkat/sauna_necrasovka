@@ -58,6 +58,20 @@
     text-align: center;
     display:none;
   }
+
+  .time {
+    .header {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      .info {
+        padding-top: 5px;
+        font-size: 12px;
+        font-weight: normal;
+        color:#C4C4C4;
+      }
+    }
+  }
 }
 
 .date-picker.row {

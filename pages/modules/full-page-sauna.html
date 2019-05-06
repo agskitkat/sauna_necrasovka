@@ -73,7 +73,9 @@
     <div class="content">
         <div class="select-list-sauna">
             <div class="header">Выберите баню</div>
-            <div class="close" ng-click="closeChooseSauna()"><img src="images/svg/close.svg"></div>
+            <div class="close" ng-click="closeChooseSauna()">
+                <img src="images/svg/close.svg">
+            </div>
 
             <div class="option {{sauna.choose?'active':'gray'}}" ng-repeat="sauna in sauna_list" ng-click="chooseSauna(sauna)">
                 <div class="name">
@@ -90,7 +92,7 @@
 
 <div class="modal {{ booleanChooseDATE?'active':'closed' }}" >
     <div class="content">
-        <datatime pick-date-controller="pickdate" close-date-modal="closemodal" min-order-hours="sauna_choose.min_h" today-free-sapce=""></datatime>
+        <datatime sauna-id="sauna.choose.id" pick-date-controller="pickdate" close-date-modal="closemodal" min-order-hours="sauna_choose.min_h"></datatime>
     </div>
 </div>
 
