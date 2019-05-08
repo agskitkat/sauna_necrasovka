@@ -26,8 +26,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 20px;
-  width: 20px;
+  height: 15px;
+  width: 15px;
   background-color: #eee;
   border-radius: 5px;
   border:3px solid #0084FF;
@@ -57,8 +57,8 @@
 
 /* Style the checkmark/indicator */
 .container-checkbox .checkmark:after {
-  left: 6px;
-  top: 3px;
+  left: 4px;
+  top: 0px;
   width: 5px;
   height: 10px;
   border: solid white;

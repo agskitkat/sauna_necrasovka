@@ -23,7 +23,7 @@ app.factory('$saunalist', function($http){
         get: function() {
             return $http({url: url_api, method: "POST", data: {
                     action : 'sauna',
-                    method  : 'getListSauna'
+                    method  : 'getList'
                 },
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             });
@@ -31,8 +31,18 @@ app.factory('$saunalist', function($http){
     }
 });
 
-app.factory('$services', function(){
+app.factory('$services', function($http){
     return {
+        get: function() {
+            return $http({url: url_api, method: "POST", data: {
+                    action : 'service',
+                    method  : 'getList'
+                },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
+        }
+    }
+    /*return {
         get: function() {
             return [
                 {
@@ -70,10 +80,10 @@ app.factory('$services', function(){
                 }
             ];
         }
-    }
+    }*/
 });
 
-app.controller("pageController", function($scope, $saunalist, $tablesheet) {
+app.controller("pageController", function($scope, $saunalist, $tablesheet, $services) {
     $scope.view_page = "";
     $scope.view_content = true;
     $scope.view_pages = false;
@@ -99,7 +109,7 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet) {
                 start:0,
                 stop:0
             },
-            guest:0
+            guest:1
         },
         service: [
             {
@@ -141,15 +151,19 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet) {
     // SAUNA
     $scope.viewTime = function(dt){
         var start = dt.start;
-        var stop = dt.stop;
+        var stop = dt.end;
+
+        //console.log(new Date(start).getTime(), new Date(stop).getTime());
 
         if(!start) {
             return "Дату и время визита";
         }
 
-        if(start <= stop) {
+        if(new Date(stop).getTime() <= new Date(start).getTime()) {
             return "Некорректная дата";
         }
+
+        return $scope.orderDate("date") + " / " + $scope.orderDate("starttime") + " - " +  $scope.orderDate("endtime");
     };
 
     $scope.booleanChooseSauna = false;
@@ -165,6 +179,8 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet) {
         $scope.sauna_choose = sauna;
         $scope.booleanChooseSauna = false;
 
+        $scope.cleanOrderSauna();
+
         setTimeout(function(){
             $scope.sliderOn = true;
             $scope.$apply();
@@ -174,6 +190,16 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet) {
     };
     $scope.closeChooseSauna = function(){
         $scope.booleanChooseSauna = false;
+    };
+    $scope.cleanOrderSauna = function() {
+        $scope.order.sauna = {
+            id: 0,
+                datetime:{
+                    start:0,
+                    stop:0
+            },
+            guest:1
+        }
     };
 
 
@@ -196,21 +222,22 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet) {
         var strat = data.y + "-" + (data.m+1) + "-" + data.d + " " + data.start_hour.t + ":00";
         var end = data.y + "-" + (data.m+1) + "-" + data.d + " " + data.end_hour.t + ":00";
 
-        console.log(strat, end);
-
         $scope.order.sauna.id = $scope.sauna_choose.id;
         $scope.order.sauna.datetime = {
             start:strat,
-            end:end
+            end:end,
+            hours: data.end_hour.t - data.start_hour.t
         };
-    };
 
+        $scope.order.sauna.current = $scope.sauna_choose;
+        //console.log($scope.order.sauna);
+
+    };
     $scope.getOrderTimeOfDateSauna = function(date) {
-        console.log(date);
+        //console.log(date);
         var d =  date.y + "-" +(date.m + 1)+ "-" + date.d;
         return $tablesheet.get( $scope.sauna_choose.id, {start: d + " 00:00:00", end: d+" 23:59:59"});
     };
-
     $scope.orderDate = function(mode) {
         var start = new Date($scope.order.sauna.datetime.start);
 
@@ -228,6 +255,29 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet) {
         }
     };
 
+    $scope.calcPrice = function() {
+        $scope.order.sauna.current = $scope.sauna_choose;
+        //console.log($scope.order.sauna);
+
+        if($scope.order.sauna.id) {
+
+            var base_price = $scope.order.sauna.current.price;
+            var overguest_price = $scope.order.sauna.current.guest_overprice;
+            var guest = $scope.order.sauna.guest;
+            var max_guest = $scope.order.sauna.current.max_guest;
+
+            base_price = $scope.order.sauna.datetime.hours * base_price;
+
+            var x = guest - max_guest;
+            if (x >= 0) {
+                base_price = base_price + (x * overguest_price);
+            }
+            return base_price + " руб.";
+        } else {
+            return "";
+        }
+    }
+
     // ORDER SAUNA CONTROL
     $scope.saunaMansCount = function(derection) {
         if( ($scope.order.sauna.guest + derection)  >= 1) {
@@ -235,13 +285,23 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet) {
         }
     };
     $scope.buttonOrderSauna = function(sauna_choose) {
-
+        $scope.viewMainPage();
     };
 
 
 
 
     // SERVICE
+    $scope.booleanChooseService = false;
+    $scope.services = [];
+    $services.get().then(function (response) {
+        angular.forEach(response.data, function(value, key) {
+            $scope.services.push(value);
+        });
+    });
+    $scope.viewServiceChooser = function(boolean) {
+        $scope.booleanChooseService = boolean;
+    };
     $scope.getServiceName = function(id){
 
     };
@@ -261,7 +321,6 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet) {
             break;
         }
     };
-
     $scope.viewMainPage = function(view_page) {
         $scope.view_page = "";
         $scope.view_content = true;
@@ -274,7 +333,6 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet) {
     $scope.orderProcess = function() {
 
     };
-
 
     $scope.currency = function(price) {
         if(!price) {

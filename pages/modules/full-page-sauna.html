@@ -35,9 +35,9 @@
 
             <div class="date" ng-click="showChooseDATE()">
                 <div class="row-1">
-                    <img src="images/svg/timetable-b.svg"> {{ (order.sauna.id!=0)?orderDate("date"):"Выбирите" }}
+                    <img src="images/svg/timetable-b.svg"> {{ (order.sauna.id)?orderDate("date"):"Выбирите" }}
                 </div>
-                <div class="row-2">
+                <div class="row-2" ng-if="order.sauna.id">
                     {{orderDate("starttime")}} - {{orderDate("endtime")}}
                 </div>
             </div>

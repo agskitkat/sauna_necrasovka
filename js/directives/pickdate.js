@@ -153,7 +153,7 @@ app.directive("datatime", function() {
                     $scope.getDays($scope.current_year, $scope.current_month);
 
                     $scope.getHourByCurrentDaySauna( $scope.current ).then(function (response) {
-                        console.log(response.data);
+                       // console.log(response.data);
                         //$scope.pickDateController( $scope.current);
 
                         for(var i = 0; i < 24; i++) {
@@ -222,7 +222,7 @@ app.directive("datatime", function() {
                             });
                         }
 
-                        console.log($scope.end_hour.t , $scope.start_hour.t , $scope.minOrderHours);
+                       // console.log($scope.end_hour.t , $scope.start_hour.t , $scope.minOrderHours);
                         if(($scope.end_hour.t - $scope.start_hour.t) < $scope.minOrderHours-1) {
                             alert("Минимальный заказ: "+$scope.minOrderHours+" часа");
                             $scope.start_hour = "";

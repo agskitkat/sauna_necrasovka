@@ -19,7 +19,7 @@
             <div class="header">
                 Услуги бани
             </div>
-            <div class="name">
+            <div class="name" ng-click="viewServiceChooser(true)">
                 Банщик
             </div>
         </div>
@@ -106,5 +106,23 @@
 
         </table>
 
+    </div>
+</div>
+
+<div class="modal {{ booleanChooseService?'active':'closed' }}">
+    <div class="content">
+        <div class="select-list-sauna">
+            <div class="header">Услуги</div>
+            <div class="close" ng-click="viewServiceChooser(false)">
+                <img src="images/svg/close.svg">
+            </div>
+
+            <div class="option {{service.choose?'active':'gray'}}" ng-repeat="service in services" ng-click="chooseService(service)">
+                <div class="name">
+                    {{service.name}}
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
