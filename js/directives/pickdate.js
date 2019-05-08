@@ -6,7 +6,8 @@ app.directive("datatime", function() {
             pickDateController: '=',
             closeDateModal: "=",
             minOrderHours: "=",
-            saunaId: "="
+            saunaId: "=",
+            getHourByCurrentDaySauna: "="
         },
         link: function($scope, element, attrs) {
             $scope.toMonth = function(intMonth){
@@ -130,22 +131,140 @@ app.directive("datatime", function() {
 
             $scope.getDays( $scope.current_year, $scope.current_month );
 
+            function in_period_time(now, start, end) {
+                if(now >= start && now <= end) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            $scope.hours = [];
+
             $scope.selectDate = function(day) {
                 if(!day.ispast) {
+                    $scope.hours = [];
                     $scope.current = {
                         d: day.num,
                         m: $scope.current_month,
                         y: $scope.current_year
                     };
+                    var nd = $scope.current;
                     $scope.getDays($scope.current_year, $scope.current_month);
-                    $scope.pickDateController(  $scope.current );
+
+                    $scope.getHourByCurrentDaySauna( $scope.current ).then(function (response) {
+                        console.log(response.data);
+                        //$scope.pickDateController( $scope.current);
+
+                        for(var i = 0; i < 24; i++) {
+                            var now = new Date(nd.y + "-" + (nd.m+1) + "-" + nd.d + " "+$scope.toReadebleHour(i)).getTime()/1000;
+                            //console.log(now, i)
+                            var h = {
+                                t:i,
+                            };
+
+                            angular.forEach(response.data, function(value, key) {
+                                var order_start = new Date(value.start).getTime()/1000;
+                                var order_end = new Date(value.end).getTime()/1000;
+
+                                if(in_period_time(now, order_start, order_end) && !h.busy) {
+                                    h.busy = true;
+                                }
+                            });
+                            $scope.hours.push(h);
+                        }
+                    });
                 };
             };
 
-            $scope.hours = function() {
-                var hours = [];
+            $scope.click = 0;
+            $scope.start_hour = "";
+            $scope.end_hour = "";
+            $scope.selectHour = function(h) {
+                if(h.busy) {
+                   return false;
+                }
 
-                return hours;
+                if(h.current) {
+                    h.current = false;
+                    $scope.click = 0;
+                }
+
+                switch($scope.click){
+                    case 0:
+                        angular.forEach($scope.hours, function(value, key) {
+                            value.current = false;
+                            value.special_class = "";
+                        });
+                        h.current = true;
+                        h.special_class = "start";
+                        $scope.click = 1;
+                        $scope.start_hour = h;
+                    break;
+                    case 1:
+                        h.special_class = "end";
+                        h.current = true;
+                        $scope.click = 0;
+                        $scope.end_hour = h;
+
+                        if($scope.end_hour.t < $scope.start_hour.t) {
+                            $scope.end_hour = $scope.start_hour;
+                            $scope.start_hour = h;
+
+                            angular.forEach($scope.hours, function(value, key) {
+                                if(value.special_class === "start") {
+                                    value.special_class = "end";
+                                } else {
+                                    if (value.special_class === "end") {
+                                        value.special_class = "start";
+                                    }
+                                }
+                            });
+                        }
+
+                        console.log($scope.end_hour.t , $scope.start_hour.t , $scope.minOrderHours);
+                        if(($scope.end_hour.t - $scope.start_hour.t) < $scope.minOrderHours-1) {
+                            alert("Минимальный заказ: "+$scope.minOrderHours+" часа");
+                            $scope.start_hour = "";
+                            $scope.end_hour = "";
+                            angular.forEach($scope.hours, function(value, key) {
+                                value.current = false;
+                                value.special_class = "";
+                            });
+                        }
+                        var allow = true;
+                        angular.forEach($scope.hours, function(value, key) {
+                            if(value.t > $scope.start_hour.t && value.t < $scope.end_hour.t && allow) {
+                                value.current = true;
+                                value.special_class = "middel";
+                                if(value.busy) {
+                                    alert("В выбраном диапозоне иеется резерв, выбирите другой временной диапозон.");
+                                    allow = false;
+                                    $scope.start_hour = "";
+                                    $scope.end_hour = "";
+                                    angular.forEach($scope.hours, function(value, key) {
+                                        value.current = false;
+                                        value.special_class = "";
+                                    });
+                                }
+                            }
+                        });
+                        if(allow) {
+                            $scope.current.start_hour = $scope.start_hour;
+                            $scope.current.end_hour = $scope.end_hour;
+                            $scope.pickDateController( $scope.current);
+                        }
+                    break;
+                }
+
+
+            };
+
+            $scope.toReadebleHour = function(i) {
+                if(i < 10) {
+                    i = "0"+i
+                }
+                return i+":00";
             }
 
         },
@@ -178,8 +297,8 @@ app.directive("datatime", function() {
             '                       Свободное время ' +
             '                   <div class="info">минимальный заказ: {{ minOrderHours }} часа</div>' +
             '                </div>          \n' +
-            '                <div class="hours" ng-repeat="hour in hours">' +
-            '                   <div class="hour">{{}}</div>   ' +
+            '                <div class="hours" >' +
+            '                   <div class="hour {{hour.busy?\'busy\':\'\'}} {{hour.current?\'current\':\'\'}} {{hour.special_class}}" ng-repeat="hour in hours" ng-click="selectHour(hour)">{{toReadebleHour(hour.t)}}</div>   ' +
             '                </div>'+
             '            </div>\n' +
             '            <span class="today" ng-click="todayView()">Сегодня</span>\n' +

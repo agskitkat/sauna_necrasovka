@@ -35,10 +35,10 @@
 
             <div class="date" ng-click="showChooseDATE()">
                 <div class="row-1">
-                    <img src="images/svg/timetable-b.svg"> 19.04.2019
+                    <img src="images/svg/timetable-b.svg"> {{ (order.sauna.id!=0)?orderDate("date"):"Выбирите" }}
                 </div>
                 <div class="row-2">
-                    19:00 - 23:00
+                    {{orderDate("starttime")}} - {{orderDate("endtime")}}
                 </div>
             </div>
 
@@ -92,7 +92,13 @@
 
 <div class="modal {{ booleanChooseDATE?'active':'closed' }}" >
     <div class="content">
-        <datatime sauna-id="sauna.choose.id" pick-date-controller="pickdate" close-date-modal="closemodal" min-order-hours="sauna_choose.min_h"></datatime>
+        <datatime sauna-id="sauna.choose.id"
+                  pick-date-controller="pickdate"
+                  close-date-modal="closemodal"
+                  min-order-hours="sauna_choose.min_h"
+                  get-hour-by-current-day-sauna="getOrderTimeOfDateSauna"
+        >
+        </datatime>
     </div>
 </div>
 

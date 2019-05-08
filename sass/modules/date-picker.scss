@@ -71,6 +71,39 @@
         color:#C4C4C4;
       }
     }
+    .hours {
+      display: flex;
+      flex-wrap: wrap;
+      .hour {
+        text-align: center;
+        padding:5px 3px;
+        width:calc(100% / 4 - 8px);
+        margin:1px;
+      }
+      .hour.current {
+        border:1px solid #EA526C;
+        border-radius: 5px;
+        margin:0px;
+      }
+      .hour.current.start {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        border-right:0px;
+      }
+      .hour.current.middel {
+        border-radius:0px;
+        border-right:0px;
+        border-left:0px;
+      }
+      .hour.current.end {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        border-left:0px;
+      }
+      .hour.busy {
+        opacity: 0.5;
+      }
+    }
   }
 }
 

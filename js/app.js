@@ -1,104 +1,32 @@
 "use strict";
+var url_api = "http://localhost/sauna_api/api.php";
 var app = angular.module("app-sauna", ['slick']);
 
-app.factory('tablesheet', function(){
+app.factory('$tablesheet', function($http){
     return {
         get: function(sauna_id, date) {
-            return [
-                {
-                    s: 10,
-                    e: 13
-                },{
-                    s: 14,
-                    e: 16
-                },{
-                    s: 18,
-                    e: 22
-                }
-            ]
+            return $http({url: url_api, method: "POST", data: {
+                    action : 'schedule',
+                    method  : 'listOfDate',
+                    sauna_id : sauna_id,
+                    timestamp_start : date.start,
+                    timestamp_end: date.end
+                },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
         }
     }
 });
 
-app.factory('$saunalist', function(){
+app.factory('$saunalist', function($http){
     return {
         get: function() {
-            return [
-                {
-                    choose:true,
-                    id: "1",
-                    name: "Сауна №1",
-                    price: 1499,
-                    min_h: 3,
-                    max_guest:2,
-                    guest_overprice:100,
-                    options: [
-                        "Простыня","Полотенце","Тапочки","Джакузи","Душ","Купель: 5х5 м",
-                        "Парная: 15 кв.м","Зона отдыха: 30 кв.м","Комната отдыха","TV"
-                    ],
-                    images:[
-                      "images/slides/slide-1.png","images/slides/slide-2.png","images/slides/slide-3.png"
-                    ],
-                },{
-                    id: "2",
-                    name: "Сауна №2",
-                    price: 3500,
-                    min_h: 2,
-                    max_guest:3,
-                    guest_overprice:150,
-                    options: [
-                        "Простыня","Полотенце",
-                        "Парная: 15 кв.м","Зона отдыха: 30 кв.м","Комната отдыха","TV"
-                    ],
-                    images:[
-                        "images/slides/slide-1.png","images/slides/slide-2.png","images/slides/slide-3.png"
-                    ],
-                },{
-                    id: "3",
-                    name: "Сауна №3",
-                    price: 1000,
-                    min_h: 2,
-                    max_guest:5,
-                    guest_overprice:100,
-                    options: [
-                        "Простыня","Полотенце","Тапочки","Джакузи","Душ","Купель: 5х5 м",
-                        "Парная: 15 кв.м"
-                    ],
-                    images:[
-                        "images/slides/slide-1.png","images/slides/slide-2.png","images/slides/slide-3.png"
-                    ],
-                },{
-                    id: "4",
-                    vip: true,
-                    name: "Сауна №4",
-                    price: 1590,
-                    min_h: 4,
-                    max_guest:6,
-                    guest_overprice:300,
-                    options: [
-                        "Простыня","Полотенце","Тапочки","Джакузи","Душ","Купель: 5х5 м",
-                        "Парная: 15 кв.м","Зона отдыха: 30 кв.м"
-                    ],
-                    images:[
-                        "images/slides/slide-1.png","images/slides/slide-2.png","images/slides/slide-3.png"
-                    ],
-                },{
-                    id: "5",
-                    vip: true,
-                    name: "Сауна №5",
-                    price: 8900,
-                    min_h: 4,
-                    max_guest:9,
-                    guest_overprice:200,
-                    options: [
-                        "Простыня","Полотенце","Тапочки","Джакузи","Душ","Купель: 5х5 м",
-                        "Парная: 15 кв.м","Зона отдыха: 30 кв.м","Комната отдыха","TV"
-                    ],
-                    images:[
-                        "images/slides/slide-1.png","images/slides/slide-3.png"
-                    ],
-                }
-            ]
+            return $http({url: url_api, method: "POST", data: {
+                    action : 'sauna',
+                    method  : 'getListSauna'
+                },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
         }
     }
 });
@@ -145,25 +73,33 @@ app.factory('$services', function(){
     }
 });
 
-app.controller("pageController", function($scope, $saunalist) {
+app.controller("pageController", function($scope, $saunalist, $tablesheet) {
     $scope.view_page = "";
     $scope.view_content = true;
     $scope.view_pages = false;
 
     $scope.sliderOn = true;
 
-    $scope.sauna_list = $saunalist.get();
-    $scope.sauna_choose = $scope.sauna_list[0];
+    $scope.sauna_list = [];
+    $saunalist.get().then(function (response) {
+        angular.forEach(response.data, function(value, key) {
+            var sauna = JSON.parse(value.sauna);
+            sauna.id = value.id;
+            $scope.sauna_list.push(sauna);
+        });
+        $scope.sauna_list[0].choose = true;
+        $scope.sauna_choose = $scope.sauna_list[0];
+
+    });
 
     $scope.order = {
         sauna: {
-            id: 1,
+            id: 0,
             datetime:{
                 start:0,
                 stop:0
             },
-            guest:1,
-            price:0
+            guest:0
         },
         service: [
             {
@@ -195,10 +131,6 @@ app.controller("pageController", function($scope, $saunalist) {
         }],
         sum: 100500
     };
-
-    $scope.free_sapace_today = [
-
-    ];
 
 
     $scope.calcOrderSum = function() {
@@ -260,7 +192,40 @@ app.controller("pageController", function($scope, $saunalist) {
         $scope.booleanChooseDATE = false;
     };
     $scope.pickdate = function(data) {
-        console.log("pickDate", data);
+
+        var strat = data.y + "-" + (data.m+1) + "-" + data.d + " " + data.start_hour.t + ":00";
+        var end = data.y + "-" + (data.m+1) + "-" + data.d + " " + data.end_hour.t + ":00";
+
+        console.log(strat, end);
+
+        $scope.order.sauna.id = $scope.sauna_choose.id;
+        $scope.order.sauna.datetime = {
+            start:strat,
+            end:end
+        };
+    };
+
+    $scope.getOrderTimeOfDateSauna = function(date) {
+        console.log(date);
+        var d =  date.y + "-" +(date.m + 1)+ "-" + date.d;
+        return $tablesheet.get( $scope.sauna_choose.id, {start: d + " 00:00:00", end: d+" 23:59:59"});
+    };
+
+    $scope.orderDate = function(mode) {
+        var start = new Date($scope.order.sauna.datetime.start);
+
+        if(mode === "date") {
+            return $scope.toReadebleHour(start.getDate()) + "." +$scope.toReadebleHour(start.getMonth()) +"." +start.getFullYear();
+        }
+
+        if(mode === "starttime") {
+            return $scope.toReadebleHour(start.getHours()) + ":" + $scope.toReadebleHour(start.getMinutes());
+        }
+
+        if(mode === "endtime") {
+            var end = new Date($scope.order.sauna.datetime.end);
+            return $scope.toReadebleHour(end.getHours()) + ":" + $scope.toReadebleHour(end.getMinutes());
+        }
     };
 
     // ORDER SAUNA CONTROL
@@ -270,7 +235,7 @@ app.controller("pageController", function($scope, $saunalist) {
         }
     };
     $scope.buttonOrderSauna = function(sauna_choose) {
-        console.log(sauna_choose);
+
     };
 
 
@@ -317,4 +282,11 @@ app.controller("pageController", function($scope, $saunalist) {
         }
         return price + " руб.";
     };
+
+    $scope.toReadebleHour = function(i) {
+        if(i < 10) {
+            i = "0"+i
+        }
+        return i;
+    }
 });
