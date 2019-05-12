@@ -1,0 +1,15 @@
+.list-open-menu {
+  .header {
+    text-align: left;
+    font-size:30px;
+  }
+  .option {
+    display: block;
+    .name {
+      color:$gray-1;
+      font-size:22px;
+      margin-bottom:10px;
+      display:block;
+    }
+  }
+}

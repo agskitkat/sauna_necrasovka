@@ -5,9 +5,9 @@
     <div class="list">
 
         <div class="list-item" ng-click="viewPage('sauna')">
-            <div class="item-list-header">Выберите баню <img src="images/svg/arrow-right.svg"></div>
+            <div class="item-list-header">Выберите сауну <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
-                <div class="in-orde-item">{{ order.sauna.current.name }} <span class="price">{{ currency(order.sauna.price) }}{{calcPrice()}}</span></div>
+                <div class="in-orde-item">{{ order.sauna.current.name?order.sauna.current.name:"Сауна" }} <span class="price">{{calcPrice()?calcPrice() + " руб.":"0 руб."}}</span></div>
                 <div class="date">{{ viewTime(order.sauna.datetime) }}</div>
             </div>
         </div>
@@ -15,24 +15,22 @@
         <div class="list-item" ng-click="viewPage('service')">
             <div class="item-list-header">Услуги бани <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
-                <div class="in-orde-item" ng-if="order.service.length" ng-repeat="service in order.service">{{ service.id }} <span class="price">{{ service.price }} руб.</span></div>
-                <div class="in-orde-item" ng-if="!order.service.length">Дополнительные банные услуги</div>
+                <div class="in-orde-item" ng-if="calcServicesPrice(service)" ng-repeat="service in services">{{ service.name }} <span class="price">{{ calcServicesPrice(service) }} руб.</span></div>
+                <div class="in-orde-item" ng-if="!calcAllServicesPrice()">Дополнительные банные услуги</div>
             </div>
         </div>
 
         <div class="list-item"  ng-click="viewPage('store')">
             <div class="item-list-header">Аксессуары для бани <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
-                <div class="in-orde-item ">Банный веник <span class="price">3 170 руб.</span></div>
-                <div class="in-orde-item ">Скраб для тела <span class="price">2 170 руб.</span></div>
+                <div class="in-orde-item" ng-repeat="good in store" ng-if="good.count > 0">{{good.name}} x{{good.count}} <span class="price">{{(good.price*good.count)}} руб.</span></div>
             </div>
         </div>
 
         <div class="list-item"  ng-click="viewPage('restaran')">
             <div class="item-list-header">Меню ресторана <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
-                <div class="in-orde-item ">Пиво <span class="price">3 170 руб.</span></div>
-                <div class="in-orde-item ">Закуски к пиву <span class="price">2 170 руб.</span></div>
+                <div class="in-orde-item " ng-repeat="cat in menu">{{cat.name}}</div>
             </div>
         </div>
 
@@ -47,9 +45,63 @@
         <div class="list-item green" ng-click="orderProcess()">
             <div class="item-list-header">Забронировать баню <img src="images/svg/arrow-right-w.svg"></div>
             <div class="in-order">
-                <div class="in-orde-item sum">Итого <span class="price">3 170 руб.</span></div>
+                <div class="in-orde-item sum">Итого <span class="price">{{orderSum()}} руб.</span></div>
             </div>
         </div>
 
+    </div>
+</div>
+
+
+<div class="modal {{ leadForm?'active':'closed' }}">
+    <div class="content">
+        <div class="select-list-sauna">
+            <div class="header">Забронировать баню</div>
+            <div class="close" ng-click="closeLeadForm()">
+                <img src="images/svg/close.svg">
+            </div>
+            <div class="lead-form">
+                <input class="input" type="text" ng-model="order.client.name" placeholder="Имя">
+                <input class="input" type="text" ng-model="order.client.phone" placeholder="Телефон">
+                <div ng-if="errorLeadeFormMsg" class="msg-error">{{errorLeadeFormMsg}}</div>
+                <a ng-click="sendLeadForm()"  class="button h50">Забронировать</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal {{ leadFormOK?'active':'closed' }}">
+    <div class="content">
+        <div class="select-list-sauna lead-form-ok">
+            <div class="header">Спасибо</div>
+            <div class="close" ng-click="closeLeadForm()">
+                <img src="images/svg/close.svg">
+            </div>
+            <div class="text">
+                С вами свяжется менеджер для подтверждения брони.
+                Ожидайте звонка.
+            </div>
+            <div class="social">
+                Присоединяйтесь к нам в социальных сетях<br><br>
+                <img src="images/social.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal {{ leadFormError?'active':'closed' }}">
+    <div class="content">
+        <div class="select-list-sauna lead-form-ok">
+            <div class="header">Возникла ошибка</div>
+            <div class="close" ng-click="closeleadFormError()">
+                <img src="images/svg/close.svg">
+            </div>
+            <div class="text">
+                {{leadFormErrorMsg}}
+            </div>
+
+        </div>
     </div>
 </div>

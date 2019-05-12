@@ -5,19 +5,51 @@
             <span class="small">место для душевного отдыха</span>
         </div>
         <div class="menu">
-            <div class="menu-btn">
+            <div class="menu-btn" ng-click="openMenu()">
                 <img src="images/svg/menu.svg">
             </div>
             <div class="phone-n-time">
                 <a class="phone" href="tel:8 (495) 706-85-97">8 (495) 706-85-97</a>
                 <span class="time">круглосуточно</span>
             </div>
-            <a href="#" class="button">
+            <a href="#sauna" class="button" ng-click="viewPage('sauna')">
                 <img src="images/svg/timetable.svg">
             </a>
         </div>
     </div>
     <div class="desktop header">
 
+    </div>
+    <div class="modal {{ viewMenu?'active':'closed' }}">
+        <div class="content">
+            <div class="select-list-sauna list-open-menu">
+                <div class="header">Меню</div>
+                <div class="close" ng-click="closeMenu()">
+                    <img src="images/svg/close.svg">
+                </div>
+
+                <div class="option">
+                    <a class="name" href="#banya">
+                        Баня
+                    </a>
+                    <a class="name" href="#sauna">
+                        Сауна
+                    </a>
+                    <a class="name" href="#hammam">
+                        Хаммам
+                    </a>
+                    <a class="name" href="#restaran" ng-click="viewPage('restaran')">
+                        Меню ресторана
+                    </a>
+                    <a class="name" href="#service" ng-click="viewPage('service')">
+                        Услуги
+                    </a>
+                    <a class="name" href="#contacts" ng-click="viewPage('contacts')">
+                        Контакты
+                    </a>
+                </div>
+
+            </div>
+        </div>
     </div>
 </header>

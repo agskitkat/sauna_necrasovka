@@ -13,84 +13,37 @@
         </div>
 
         <div class="catalog">
-            <div class="btn active">Для Мужчин</div>
-            <div class="btn">Для Женщин</div>
+            <div class="btn {{storeFilterValue.category==='men'?'active':'' }}" ng-click="storeFilter('men')">Для Мужчин</div>
+            <div class="btn {{storeFilterValue.category==='women'?'active':'' }}" ng-click="storeFilter('women')">Для Женщин</div>
         </div>
 
-        <slick class="variable-width"
+        <slick ng-if="sliderOnStore" class="variable-width"
                variable-width="true"
                arrows="false"
                dots="false"
                slides-to-Show="1"
-               infinite="true"
+               infinite="false"
                speed="500">
-            <div class="good">
-                <div class="good-wrap">
-                    <img class="good-image" src="images/good/good-1.png">
-                    <div class="good-name">
-                        Веник дубовый
-                    </div>
-                    <div class="good-price">
-                        300 руб.
-                    </div>
-                    <div class="">
-                        <div class="order">
-                            <div class="control">
-                                <div class="buttons">
-                                    <div class="btn decrement disabled">-</div>
-                                    <div class="result">1</div>
-                                    <div class="btn  increment">+</div>
-                                </div>
-                            </div>
-                            <a class="order-btn button">ЗАКАЗАТЬ</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="good">
+            <div class="good" ng-repeat="good in store | filter:storeFilterValue">
                 <div class="good-wrap">
-                    <img class="good-image" src="images/good/good-1.png">
+                    <img class="good-image" src="{{good.image}}">
                     <div class="good-name">
-                        Веник дубовый
+                        {{good.name}}
                     </div>
                     <div class="good-price">
-                        300 руб.
+                        {{good.price}} руб.
                     </div>
                     <div class="">
                         <div class="order">
                             <div class="control">
                                 <div class="buttons">
-                                    <div class="btn decrement disabled">-</div>
-                                    <div class="result">1</div>
-                                    <div class="btn  increment">+</div>
+                                    <div class="btn decrement {{!good.count?\"disabled\":\"\"}}" ng-click="goodCount(good, -1)">-</div>
+                                    <div class="result">{{good.count}} </div>
+                                    <div class="btn  increment" ng-click="goodCount(good, 1)">+</div>
                                 </div>
                             </div>
-                            <a class="order-btn button">ЗАКАЗАТЬ</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="good">
-                <div class="good-wrap">
-                    <img class="good-image" src="images/good/good-1.png">
-                    <div class="good-name">
-                        Веник дубовый
-                    </div>
-                    <div class="good-price">
-                        300 руб.
-                    </div>
-                    <div class="">
-                        <div class="order">
-                            <div class="control">
-                                <div class="buttons">
-                                    <div class="btn decrement disabled">-</div>
-                                    <div class="result">1</div>
-                                    <div class="btn  increment">+</div>
-                                </div>
-                            </div>
-                            <a class="order-btn button">ЗАКАЗАТЬ</a>
+                            <a class="order-btn button" ng-click="orderStore()">ЗАКАЗАТЬ</a>
                         </div>
                     </div>
                 </div>

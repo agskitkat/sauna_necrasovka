@@ -1,0 +1,29 @@
+.lead-form {
+  padding-top:30px;
+
+}
+
+.lead-form-ok {
+  font-size: 16px;
+  .header {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
+    padding-bottom:20px;
+  }
+  .text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .social {
+    padding-top:40px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+.msg-error {
+  color:#AA0000;
+  font-weight: bold;
+  padding:5px;
+}

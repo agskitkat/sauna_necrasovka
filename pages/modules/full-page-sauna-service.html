@@ -20,16 +20,17 @@
                 Услуги бани
             </div>
             <div class="name" ng-click="viewServiceChooser(true)">
-                Банщик
+                {{service_current.name}}
             </div>
         </div>
 
+
         <div class="price-date order no-top-padding">
             <div class="price">
-                <div class="realprice">2 499 руб.</div>
+                <div class="realprice">{{ calcServicesPrice(service_current) }} руб.</div>
                 <div class="row-2">Стоимость услуг</div>
             </div>
-            <a class="order-btn button">ЗАКАЗАТЬ</a>
+            <a class="order-btn button" ng-click="serviceOrder()">ЗАКАЗАТЬ</a>
         </div>
 
 
@@ -47,7 +48,7 @@
                 </th>
             </tr>
 
-            <tr class="item">
+           <!--  <tr class="item">
                 <td>
                     1.
                 </td>
@@ -62,45 +63,26 @@
                 </td>
             </tr>
 
-
-
             <tr>
                 <td class="break" colspan="5"></td>
             </tr>
+            -->
 
-            <tr class="item-order">
+            <tr class="item-order" ng-repeat="item_service in service_current.services">
                 <td>
                     <label class="container-checkbox">
-                        <input type="checkbox" checked="checked">
+                        <input type="checkbox" ng-model="item_service.check" ng-checked="item_service.check">
                         <span class="checkmark"></span>
                     </label>
                 </td>
                 <td>
-                    Парение классическое
+                    {{item_service.name}}
                 </td>
                 <td>
-                    30 мин
+                    {{item_service.time}}
                 </td>
                 <td>
-                    4 499 руб.
-                </td>
-            </tr>
-
-            <tr class="item-order">
-                <td>
-                    <label class="container-checkbox">
-                        <input type="checkbox" checked="checked">
-                        <span class="checkmark"></span>
-                    </label>
-                </td>
-                <td>
-                    Парение классическое
-                </td>
-                <td>
-                    30 мин
-                </td>
-                <td>
-                    4 499 руб.
+                    {{item_service.price}}
                 </td>
             </tr>
 
@@ -117,7 +99,7 @@
                 <img src="images/svg/close.svg">
             </div>
 
-            <div class="option {{service.choose?'active':'gray'}}" ng-repeat="service in services" ng-click="chooseService(service)">
+            <div class="option {{service.current?'active':'gray'}}" ng-repeat="service in services" ng-click="chooseService(service)">
                 <div class="name">
                     {{service.name}}
                 </div>

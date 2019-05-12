@@ -42,48 +42,35 @@ app.factory('$services', function($http){
             });
         }
     }
-    /*return {
-        get: function() {
-            return [
-                {
-                    id: "1",
-                    name: "Банщик",
-                    services: [
-                        {
-                            id: "1",
-                            name: "Парение классическое",
-                            time: "30 мин",
-                            price: 4499
-                        },{
-                            id: "2",
-                            name: "Парение",
-                            time: "45 мин",
-                            price: 1499
-                        }
-                    ]
-                },{
-                    id: "2",
-                    name: "Массажист",
-                    services: [
-                        {
-                            id: "1",
-                            name: "Парение классическое",
-                            time: "30 мин",
-                            price: 4499
-                        },{
-                            id: "2",
-                            name: "Парение",
-                            time: "45 мин",
-                            price: 1499
-                        }
-                    ]
-                }
-            ];
-        }
-    }*/
 });
 
-app.controller("pageController", function($scope, $saunalist, $tablesheet, $services) {
+app.factory('$store', function($http){
+    return {
+        get: function() {
+            return $http({url: url_api, method: "POST", data: {
+                    action : 'store',
+                    method  : 'getList'
+                },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
+        }
+    }
+});
+
+app.factory('$menu', function($http){
+    return {
+        get: function() {
+            return $http({url: url_api, method: "POST", data: {
+                    action : 'menu',
+                    method  : 'getList'
+                },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
+        }
+    }
+});
+
+app.controller("pageController", function($scope, $saunalist, $tablesheet, $services, $store, $menu, $http) {
     $scope.view_page = "";
     $scope.view_content = true;
     $scope.view_pages = false;
@@ -97,12 +84,17 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet, $serv
             sauna.id = value.id;
             $scope.sauna_list.push(sauna);
         });
-        $scope.sauna_list[0].choose = true;
-        $scope.sauna_choose = $scope.sauna_list[0];
 
     });
-
+    $scope.getFirstSauna = function(){
+        $scope.sauna_list[0].choose = true;
+        $scope.sauna_choose = $scope.sauna_list[0];
+    }
     $scope.order = {
+        client: {
+          name:"",
+          phone:""
+        },
         sauna: {
             id: 0,
             datetime:{
@@ -111,42 +103,9 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet, $serv
             },
             guest:1
         },
-        service: [
-            {
-                id: 1,
-                price:2499,
-                services: [
-                    {
-                        id: 1,
-                        price: 2499
-                    },{
-                        id: 2,
-                        price: 2499
-                    }
-                ]
-            }
-        ],
-        store: [{
-                id: 1,
-                count: 3,
-                price: 2499
-            },{
-                id: 2,
-                count: 2,
-                price: 2499
-            },{
-                id: 3,
-                count: 1,
-                price: 2499
-        }],
-        sum: 100500
+        service: [],
+        store: []
     };
-
-
-    $scope.calcOrderSum = function() {
-        // Calc sauna
-    };
-
 
     // SAUNA
     $scope.viewTime = function(dt){
@@ -165,7 +124,6 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet, $serv
 
         return $scope.orderDate("date") + " / " + $scope.orderDate("starttime") + " - " +  $scope.orderDate("endtime");
     };
-
     $scope.booleanChooseSauna = false;
     $scope.showChooseSauna = function () {
         $scope.booleanChooseSauna = true;
@@ -218,20 +176,16 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet, $serv
         $scope.booleanChooseDATE = false;
     };
     $scope.pickdate = function(data) {
-
         var strat = data.y + "-" + (data.m+1) + "-" + data.d + " " + data.start_hour.t + ":00";
         var end = data.y + "-" + (data.m+1) + "-" + data.d + " " + data.end_hour.t + ":00";
-
         $scope.order.sauna.id = $scope.sauna_choose.id;
         $scope.order.sauna.datetime = {
             start:strat,
             end:end,
             hours: data.end_hour.t - data.start_hour.t
         };
-
         $scope.order.sauna.current = $scope.sauna_choose;
         //console.log($scope.order.sauna);
-
     };
     $scope.getOrderTimeOfDateSauna = function(date) {
         //console.log(date);
@@ -254,30 +208,23 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet, $serv
             return $scope.toReadebleHour(end.getHours()) + ":" + $scope.toReadebleHour(end.getMinutes());
         }
     };
-
     $scope.calcPrice = function() {
         $scope.order.sauna.current = $scope.sauna_choose;
-        //console.log($scope.order.sauna);
-
         if($scope.order.sauna.id) {
-
             var base_price = $scope.order.sauna.current.price;
             var overguest_price = $scope.order.sauna.current.guest_overprice;
             var guest = $scope.order.sauna.guest;
             var max_guest = $scope.order.sauna.current.max_guest;
-
             base_price = $scope.order.sauna.datetime.hours * base_price;
-
             var x = guest - max_guest;
             if (x >= 0) {
                 base_price = base_price + (x * overguest_price);
             }
-            return base_price + " руб.";
+            return base_price;
         } else {
-            return "";
+            return 0;
         }
     }
-
     // ORDER SAUNA CONTROL
     $scope.saunaMansCount = function(derection) {
         if( ($scope.order.sauna.guest + derection)  >= 1) {
@@ -290,14 +237,19 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet, $serv
 
 
 
-
     // SERVICE
     $scope.booleanChooseService = false;
     $scope.services = [];
+    $scope.service_current = {};
     $services.get().then(function (response) {
         angular.forEach(response.data, function(value, key) {
-            $scope.services.push(value);
+            var item = JSON.parse(value.json);
+            item.id = value.id;
+            $scope.services.push(item);
         });
+        console.log( $scope.services);
+        $scope.services[0].current = true;
+        $scope.service_current = $scope.services[0];
     });
     $scope.viewServiceChooser = function(boolean) {
         $scope.booleanChooseService = boolean;
@@ -305,15 +257,100 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet, $serv
     $scope.getServiceName = function(id){
 
     };
+    $scope.chooseService = function(service) {
+        $scope.service_current = service;
+        angular.forEach($scope.services, function(value, key) {
+            value.current = false;
+        });
+        $scope.service_current.current = true;
+    }
+    $scope.calcServicesPrice = function(service) {
+        var price = 0;
+        angular.forEach( service.services, function(value, key) {
+            if(value.check) {
+                price += parseInt( value.price);
+            }
+        });
+        return price;
+    }
+    $scope.calcAllServicesPrice = function() {
+        var price = 0;
+        angular.forEach( $scope.services, function(service, key) {
+            price += $scope.calcServicesPrice(service);
+        });
+        return price;
+    }
+    $scope.serviceOrder = function () {
+        $scope.viewMainPage();
+    };
+
+
+    // STORE
+    $scope.sliderOnStore = true;
+    $scope.store = [];
+    $scope.storeFilterValue = {category: "men"};
+    $store.get().then(function (response) {
+        angular.forEach(response.data, function(value, key) {
+            var item = JSON.parse(value.json);
+            item.id = value.id;
+            item.count = 0;
+            $scope.store.push(item);
+        });
+        console.log( $scope.store );
+    });
+    $scope.goodCount = function(good, direction) {
+        if(good.count < 1 && direction < 0) {
+            return false;
+        } else {
+            good.count = good.count + direction;
+        }
+    }
+    $scope.storeFilter = function(val) {
+        $scope.storeFilterValue.category = val;
+        $scope.sliderOnStore = false;
+        setTimeout(function(){
+            $scope.sliderOnStore = true;
+            $scope.$apply();
+        },0);
+    }
+    $scope.orderStore = function() {
+        $scope.viewMainPage();
+    }
+    $scope.calcAllStore = function() {
+        var price = 0;
+        angular.forEach($scope.store, function(value, key) {
+            if(value.count > 0) {
+                price = price + value.count * value.price;
+            }
+        });
+        return price;
+    }
+
+
+    // MENU
+    $scope.menu = [];
+    $menu.get().then(function (response) {
+        angular.forEach(response.data, function(value, key) {
+            var item = JSON.parse(value.json);
+            item.id = value.id;
+            $scope.menu.push(item);
+        });
+        console.log( $scope.menu );
+    });
 
 
     // PAGES
     $scope.viewPage = function(view_page) {
+        $scope.closeMenu();
         $scope.view_page = view_page;
         $scope.view_content = false;
         $scope.view_pages =  true;
 
         $scope.booleanChooseSauna = false;
+
+        if(view_page === 'sauna' && !$scope.sauna_choose) {
+            $scope.getFirstSauna();
+        }
 
         switch(view_page) {
             case "":
@@ -328,10 +365,97 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet, $serv
     };
 
 
-
-
+    // ORDER
+    $scope.orderSum  = function() {
+        return parseInt($scope.calcPrice()) + parseInt($scope.calcAllServicesPrice())  + parseInt($scope.calcAllStore());
+    };
     $scope.orderProcess = function() {
+        if($scope.calcPrice() != 0) {
+            // Собираем сервисы
+            $scope.order.service = [];
+            angular.forEach( $scope.services , function(service, key) {
+                angular.forEach( service.services, function(value, key) {
+                    if(value.check) {
+                        $scope.order.service.push(value);
+                    }
+                });
+            });
+            // Собираем магазин
+            angular.forEach($scope.store, function(value, key) {
+                if(value.count > 0) {
+                    $scope.order.store.push(value);
+                }
+            });
+            // Показывем окно лида
 
+            $scope.leadForm = true;
+
+        } else {
+            alert("Выбирете сауну и дату посещения");
+        }
+    };
+    $scope.leadForm = false;
+    $scope.leadFormOK = false;
+    $scope.leadFormError = false;
+    $scope.errorLeadeFormMsg = false;
+    $scope.closeLeadForm = function() {
+        $scope.leadForm = false;
+        $scope.leadFormOK = false;
+    };
+    var lock_order = false;
+    $scope.sendLeadForm = function() {
+        if(!lock_order) {
+            lock_order = true;
+            console.log($scope.order);
+            //$scope.leadFormOK = true;
+
+            if (!$scope.order.client.name) {
+                $scope.errorLeadeFormMsg = "Введите имя.";
+                console.log("Нет имени");
+                lock_order = false;
+                return false;
+            }
+
+            if ($scope.ValidPhone($scope.order.client.phone)) {
+                console.log("Нет нормального телефона");
+                $scope.errorLeadeFormMsg = "Введите корректный номер телефона. Пример: 8 123 123 12 23";
+                lock_order = false;
+                return false;
+            }
+
+            $http({url: url_api, method: "POST", data: {
+                    action : 'order',
+                    method  : 'createOrder',
+                    data: $scope.order
+                },
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function (response) {
+                console.log(response.data);
+                if(response.data.code === "ok") {
+                    lock_order = false;
+                    $scope.leadForm = false;
+                    $scope.leadFormOK = true;
+                } else {
+                    lock_order = false;
+                    $scope.leadForm = false;
+                    $scope.leadFormOK = false;
+                    $scope.leadFormError = true;
+                    $scope.leadFormErrorMsg = response.data.msg;
+                }
+            });
+        }
+    };
+
+    $scope.closeleadFormError = function() {
+        $scope.leadFormError = false;
+    }
+
+
+    // SPECIAL FUNCTION
+    $scope.ValidPhone = function(myPhone) {
+        var re = /^\+?[\d\s\(\)\-]{4,16}\d$/gm;
+        var valid = re.test(myPhone);
+        return !valid;
     };
 
     $scope.currency = function(price) {
@@ -340,11 +464,18 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet, $serv
         }
         return price + " руб.";
     };
-
     $scope.toReadebleHour = function(i) {
         if(i < 10) {
             i = "0"+i
         }
         return i;
+    }
+
+    $scope.viewMenu = false;
+    $scope.openMenu = function() {
+        $scope.viewMenu = true;
+    }
+    $scope.closeMenu = function() {
+        $scope.viewMenu = false;
     }
 });

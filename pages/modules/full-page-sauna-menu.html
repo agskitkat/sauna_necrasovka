@@ -20,51 +20,12 @@
             </div>
         </div>
 
-        <div class="menu-block">
-            <div class="header">Пиво</div>
-            <div class="row">
-                <div class="weight">0,5 л</div>
-                <div class="name">Жигулевское барное</div>
-                <div class="price">50 руб.</div>
-            </div>
-            <div class="row">
-                <div class="weight">0,5 л</div>
-                <div class="name">Жигулевское барное</div>
-                <div class="price">50 руб.</div>
-            </div>
-            <div class="row">
-                <div class="weight">0,5 л</div>
-                <div class="name">Жигулевское барное</div>
-                <div class="price">50 руб.</div>
-            </div>
-            <div class="row">
-                <div class="weight">0,5 л</div>
-                <div class="name">Жигулевское барное</div>
-                <div class="price">50 руб.</div>
-            </div>
-        </div>
-
-        <div class="menu-block">
-            <div class="header">Закуски</div>
-            <div class="row">
-                <div class="weight">0,5 л</div>
-                <div class="name">Жигулевское барное</div>
-                <div class="price">50 руб.</div>
-            </div>
-            <div class="row">
-                <div class="weight">0,5 л</div>
-                <div class="name">Жигулевское барное</div>
-                <div class="price">50 руб.</div>
-            </div>
-            <div class="row">
-                <div class="weight">0,5 л</div>
-                <div class="name">Жигулевское барное</div>
-                <div class="price">50 руб.</div>
-            </div>
-            <div class="row">
-                <div class="weight">0,5 л</div>
-                <div class="name">Жигулевское барное</div>
-                <div class="price">50 руб.</div>
+        <div class="menu-block" ng-repeat="cat in menu">
+            <div class="header">{{cat.name}}</div>
+            <div class="row" ng-repeat="item in cat.items">
+                <div class="weight">{{item.weigth}}</div>
+                <div class="name">{{item.name}}</div>
+                <div class="price">{{item.price}} руб.</div>
             </div>
         </div>
 

@@ -30,20 +30,52 @@
                     <span class="small">место для душевного отдыха</span>
                 </div>
                 <div class="menu">
-                    <div class="menu-btn">
+                    <div class="menu-btn" ng-click="openMenu()">
                         <img src="images/svg/menu.svg">
                     </div>
                     <div class="phone-n-time">
                         <a class="phone" href="tel:8 (495) 706-85-97">8 (495) 706-85-97</a>
                         <span class="time">круглосуточно</span>
                     </div>
-                    <a href="#" class="button">
+                    <a href="#sauna" class="button" ng-click="viewPage('sauna')">
                         <img src="images/svg/timetable.svg">
                     </a>
                 </div>
             </div>
             <div class="desktop header">
         
+            </div>
+            <div class="modal {{ viewMenu?'active':'closed' }}">
+                <div class="content">
+                    <div class="select-list-sauna list-open-menu">
+                        <div class="header">Меню</div>
+                        <div class="close" ng-click="closeMenu()">
+                            <img src="images/svg/close.svg">
+                        </div>
+        
+                        <div class="option">
+                            <a class="name" href="#banya">
+                                Баня
+                            </a>
+                            <a class="name" href="#sauna">
+                                Сауна
+                            </a>
+                            <a class="name" href="#hammam">
+                                Хаммам
+                            </a>
+                            <a class="name" href="#restaran" ng-click="viewPage('restaran')">
+                                Меню ресторана
+                            </a>
+                            <a class="name" href="#service" ng-click="viewPage('service')">
+                                Услуги
+                            </a>
+                            <a class="name" href="#contacts" ng-click="viewPage('contacts')">
+                                Контакты
+                            </a>
+                        </div>
+        
+                    </div>
+                </div>
             </div>
         </header>
         <div class="banner">
@@ -60,9 +92,9 @@
             <div class="list">
         
                 <div class="list-item" ng-click="viewPage('sauna')">
-                    <div class="item-list-header">Выберите баню <img src="images/svg/arrow-right.svg"></div>
+                    <div class="item-list-header">Выберите сауну <img src="images/svg/arrow-right.svg"></div>
                     <div class="in-order">
-                        <div class="in-orde-item">{{ order.sauna.current.name }} <span class="price">{{ currency(order.sauna.price) }}{{calcPrice()}}</span></div>
+                        <div class="in-orde-item">{{ order.sauna.current.name?order.sauna.current.name:"Сауна" }} <span class="price">{{calcPrice()?calcPrice() + " руб.":"0 руб."}}</span></div>
                         <div class="date">{{ viewTime(order.sauna.datetime) }}</div>
                     </div>
                 </div>
@@ -70,24 +102,22 @@
                 <div class="list-item" ng-click="viewPage('service')">
                     <div class="item-list-header">Услуги бани <img src="images/svg/arrow-right.svg"></div>
                     <div class="in-order">
-                        <div class="in-orde-item" ng-if="order.service.length" ng-repeat="service in order.service">{{ service.id }} <span class="price">{{ service.price }} руб.</span></div>
-                        <div class="in-orde-item" ng-if="!order.service.length">Дополнительные банные услуги</div>
+                        <div class="in-orde-item" ng-if="calcServicesPrice(service)" ng-repeat="service in services">{{ service.name }} <span class="price">{{ calcServicesPrice(service) }} руб.</span></div>
+                        <div class="in-orde-item" ng-if="!calcAllServicesPrice()">Дополнительные банные услуги</div>
                     </div>
                 </div>
         
                 <div class="list-item"  ng-click="viewPage('store')">
                     <div class="item-list-header">Аксессуары для бани <img src="images/svg/arrow-right.svg"></div>
                     <div class="in-order">
-                        <div class="in-orde-item ">Банный веник <span class="price">3 170 руб.</span></div>
-                        <div class="in-orde-item ">Скраб для тела <span class="price">2 170 руб.</span></div>
+                        <div class="in-orde-item" ng-repeat="good in store" ng-if="good.count > 0">{{good.name}} x{{good.count}} <span class="price">{{(good.price*good.count)}} руб.</span></div>
                     </div>
                 </div>
         
                 <div class="list-item"  ng-click="viewPage('restaran')">
                     <div class="item-list-header">Меню ресторана <img src="images/svg/arrow-right.svg"></div>
                     <div class="in-order">
-                        <div class="in-orde-item ">Пиво <span class="price">3 170 руб.</span></div>
-                        <div class="in-orde-item ">Закуски к пиву <span class="price">2 170 руб.</span></div>
+                        <div class="in-orde-item " ng-repeat="cat in menu">{{cat.name}}</div>
                     </div>
                 </div>
         
@@ -102,10 +132,64 @@
                 <div class="list-item green" ng-click="orderProcess()">
                     <div class="item-list-header">Забронировать баню <img src="images/svg/arrow-right-w.svg"></div>
                     <div class="in-order">
-                        <div class="in-orde-item sum">Итого <span class="price">3 170 руб.</span></div>
+                        <div class="in-orde-item sum">Итого <span class="price">{{orderSum()}} руб.</span></div>
                     </div>
                 </div>
         
+            </div>
+        </div>
+        
+        
+        <div class="modal {{ leadForm?'active':'closed' }}">
+            <div class="content">
+                <div class="select-list-sauna">
+                    <div class="header">Забронировать баню</div>
+                    <div class="close" ng-click="closeLeadForm()">
+                        <img src="images/svg/close.svg">
+                    </div>
+                    <div class="lead-form">
+                        <input class="input" type="text" ng-model="order.client.name" placeholder="Имя">
+                        <input class="input" type="text" ng-model="order.client.phone" placeholder="Телефон">
+                        <div ng-if="errorLeadeFormMsg" class="msg-error">{{errorLeadeFormMsg}}</div>
+                        <a ng-click="sendLeadForm()"  class="button h50">Забронировать</a>
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal {{ leadFormOK?'active':'closed' }}">
+            <div class="content">
+                <div class="select-list-sauna lead-form-ok">
+                    <div class="header">Спасибо</div>
+                    <div class="close" ng-click="closeLeadForm()">
+                        <img src="images/svg/close.svg">
+                    </div>
+                    <div class="text">
+                        С вами свяжется менеджер для подтверждения брони.
+                        Ожидайте звонка.
+                    </div>
+                    <div class="social">
+                        Присоединяйтесь к нам в социальных сетях<br><br>
+                        <img src="images/social.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="modal {{ leadFormError?'active':'closed' }}">
+            <div class="content">
+                <div class="select-list-sauna lead-form-ok">
+                    <div class="header">Возникла ошибка</div>
+                    <div class="close" ng-click="closeleadFormError()">
+                        <img src="images/svg/close.svg">
+                    </div>
+                    <div class="text">
+                        {{leadFormErrorMsg}}
+                    </div>
+        
+                </div>
             </div>
         </div>
         <footer>
@@ -132,6 +216,7 @@
                        dots="true"
                        slides-to-show="1"
                        infinite="true"
+                       center-mode="true"
                        speed="500">
                     <div ng-repeat="image in sauna_choose.images">
                         <img src="{{ image }}">
@@ -245,16 +330,17 @@
                         Услуги бани
                     </div>
                     <div class="name" ng-click="viewServiceChooser(true)">
-                        Банщик
+                        {{service_current.name}}
                     </div>
                 </div>
         
+        
                 <div class="price-date order no-top-padding">
                     <div class="price">
-                        <div class="realprice">2 499 руб.</div>
+                        <div class="realprice">{{ calcServicesPrice(service_current) }} руб.</div>
                         <div class="row-2">Стоимость услуг</div>
                     </div>
-                    <a class="order-btn button">ЗАКАЗАТЬ</a>
+                    <a class="order-btn button" ng-click="serviceOrder()">ЗАКАЗАТЬ</a>
                 </div>
         
         
@@ -272,7 +358,7 @@
                         </th>
                     </tr>
         
-                    <tr class="item">
+                   <!--  <tr class="item">
                         <td>
                             1.
                         </td>
@@ -287,45 +373,26 @@
                         </td>
                     </tr>
         
-        
-        
                     <tr>
                         <td class="break" colspan="5"></td>
                     </tr>
+                    -->
         
-                    <tr class="item-order">
+                    <tr class="item-order" ng-repeat="item_service in service_current.services">
                         <td>
                             <label class="container-checkbox">
-                                <input type="checkbox" checked="checked">
+                                <input type="checkbox" ng-model="item_service.check" ng-checked="item_service.check">
                                 <span class="checkmark"></span>
                             </label>
                         </td>
                         <td>
-                            Парение классическое
+                            {{item_service.name}}
                         </td>
                         <td>
-                            30 мин
+                            {{item_service.time}}
                         </td>
                         <td>
-                            4 499 руб.
-                        </td>
-                    </tr>
-        
-                    <tr class="item-order">
-                        <td>
-                            <label class="container-checkbox">
-                                <input type="checkbox" checked="checked">
-                                <span class="checkmark"></span>
-                            </label>
-                        </td>
-                        <td>
-                            Парение классическое
-                        </td>
-                        <td>
-                            30 мин
-                        </td>
-                        <td>
-                            4 499 руб.
+                            {{item_service.price}}
                         </td>
                     </tr>
         
@@ -342,7 +409,7 @@
                         <img src="images/svg/close.svg">
                     </div>
         
-                    <div class="option {{service.choose?'active':'gray'}}" ng-repeat="service in services" ng-click="chooseService(service)">
+                    <div class="option {{service.current?'active':'gray'}}" ng-repeat="service in services" ng-click="chooseService(service)">
                         <div class="name">
                             {{service.name}}
                         </div>
@@ -366,84 +433,37 @@
                 </div>
         
                 <div class="catalog">
-                    <div class="btn active">Для Мужчин</div>
-                    <div class="btn">Для Женщин</div>
+                    <div class="btn {{storeFilterValue.category==='men'?'active':'' }}" ng-click="storeFilter('men')">Для Мужчин</div>
+                    <div class="btn {{storeFilterValue.category==='women'?'active':'' }}" ng-click="storeFilter('women')">Для Женщин</div>
                 </div>
         
-                <slick class="variable-width"
+                <slick ng-if="sliderOnStore" class="variable-width"
                        variable-width="true"
                        arrows="false"
                        dots="false"
                        slides-to-Show="1"
-                       infinite="true"
+                       infinite="false"
                        speed="500">
-                    <div class="good">
-                        <div class="good-wrap">
-                            <img class="good-image" src="images/good/good-1.png">
-                            <div class="good-name">
-                                Веник дубовый
-                            </div>
-                            <div class="good-price">
-                                300 руб.
-                            </div>
-                            <div class="">
-                                <div class="order">
-                                    <div class="control">
-                                        <div class="buttons">
-                                            <div class="btn decrement disabled">-</div>
-                                            <div class="result">1</div>
-                                            <div class="btn  increment">+</div>
-                                        </div>
-                                    </div>
-                                    <a class="order-btn button">ЗАКАЗАТЬ</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
         
-                    <div class="good">
+                    <div class="good" ng-repeat="good in store | filter:storeFilterValue">
                         <div class="good-wrap">
-                            <img class="good-image" src="images/good/good-1.png">
+                            <img class="good-image" src="{{good.image}}">
                             <div class="good-name">
-                                Веник дубовый
+                                {{good.name}}
                             </div>
                             <div class="good-price">
-                                300 руб.
+                                {{good.price}} руб.
                             </div>
                             <div class="">
                                 <div class="order">
                                     <div class="control">
                                         <div class="buttons">
-                                            <div class="btn decrement disabled">-</div>
-                                            <div class="result">1</div>
-                                            <div class="btn  increment">+</div>
+                                            <div class="btn decrement {{!good.count?\"disabled\":\"\"}}" ng-click="goodCount(good, -1)">-</div>
+                                            <div class="result">{{good.count}} </div>
+                                            <div class="btn  increment" ng-click="goodCount(good, 1)">+</div>
                                         </div>
                                     </div>
-                                    <a class="order-btn button">ЗАКАЗАТЬ</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <div class="good">
-                        <div class="good-wrap">
-                            <img class="good-image" src="images/good/good-1.png">
-                            <div class="good-name">
-                                Веник дубовый
-                            </div>
-                            <div class="good-price">
-                                300 руб.
-                            </div>
-                            <div class="">
-                                <div class="order">
-                                    <div class="control">
-                                        <div class="buttons">
-                                            <div class="btn decrement disabled">-</div>
-                                            <div class="result">1</div>
-                                            <div class="btn  increment">+</div>
-                                        </div>
-                                    </div>
-                                    <a class="order-btn button">ЗАКАЗАТЬ</a>
+                                    <a class="order-btn button" ng-click="orderStore()">ЗАКАЗАТЬ</a>
                                 </div>
                             </div>
                         </div>
@@ -474,51 +494,12 @@
                     </div>
                 </div>
         
-                <div class="menu-block">
-                    <div class="header">Пиво</div>
-                    <div class="row">
-                        <div class="weight">0,5 л</div>
-                        <div class="name">Жигулевское барное</div>
-                        <div class="price">50 руб.</div>
-                    </div>
-                    <div class="row">
-                        <div class="weight">0,5 л</div>
-                        <div class="name">Жигулевское барное</div>
-                        <div class="price">50 руб.</div>
-                    </div>
-                    <div class="row">
-                        <div class="weight">0,5 л</div>
-                        <div class="name">Жигулевское барное</div>
-                        <div class="price">50 руб.</div>
-                    </div>
-                    <div class="row">
-                        <div class="weight">0,5 л</div>
-                        <div class="name">Жигулевское барное</div>
-                        <div class="price">50 руб.</div>
-                    </div>
-                </div>
-        
-                <div class="menu-block">
-                    <div class="header">Закуски</div>
-                    <div class="row">
-                        <div class="weight">0,5 л</div>
-                        <div class="name">Жигулевское барное</div>
-                        <div class="price">50 руб.</div>
-                    </div>
-                    <div class="row">
-                        <div class="weight">0,5 л</div>
-                        <div class="name">Жигулевское барное</div>
-                        <div class="price">50 руб.</div>
-                    </div>
-                    <div class="row">
-                        <div class="weight">0,5 л</div>
-                        <div class="name">Жигулевское барное</div>
-                        <div class="price">50 руб.</div>
-                    </div>
-                    <div class="row">
-                        <div class="weight">0,5 л</div>
-                        <div class="name">Жигулевское барное</div>
-                        <div class="price">50 руб.</div>
+                <div class="menu-block" ng-repeat="cat in menu">
+                    <div class="header">{{cat.name}}</div>
+                    <div class="row" ng-repeat="item in cat.items">
+                        <div class="weight">{{item.weigth}}</div>
+                        <div class="name">{{item.name}}</div>
+                        <div class="price">{{item.price}} руб.</div>
                     </div>
                 </div>
         
