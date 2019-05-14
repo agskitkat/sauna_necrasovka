@@ -215,7 +215,7 @@ app.controller("pageController", function($scope, $saunalist, $tablesheet, $serv
             var overguest_price = $scope.order.sauna.current.guest_overprice;
             var guest = $scope.order.sauna.guest;
             var max_guest = $scope.order.sauna.current.max_guest;
-            base_price = $scope.order.sauna.datetime.hours * base_price;
+            base_price = ($scope.order.sauna.datetime.hours+1) * base_price;
             var x = guest - max_guest;
             if (x >= 0) {
                 base_price = base_price + (x * overguest_price);
