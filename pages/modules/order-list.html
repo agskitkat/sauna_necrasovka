@@ -7,7 +7,10 @@
         <div class="list-item" ng-click="viewPage('sauna')">
             <div class="item-list-header">Выберите сауну <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
-                <div class="in-orde-item">{{ order.sauna.current.name?order.sauna.current.name:"Сауна" }} <span class="price">{{calcPrice()?calcPrice() + " руб.":"0 руб."}}</span></div>
+                <div class="in-orde-item">
+                    {{ order.sauna.current.name?order.sauna.current.name:"Сауна" }}
+                    <span class="price">{{calcPrice()?calcPrice() + " руб.":"0 руб."}}</span>
+                </div>
                 <div class="date">{{ viewTime(order.sauna.datetime) }}</div>
             </div>
         </div>
@@ -15,7 +18,9 @@
         <div class="list-item" ng-click="viewPage('service')">
             <div class="item-list-header">Услуги бани <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
-                <div class="in-orde-item" ng-if="calcServicesPrice(service)" ng-repeat="service in services">{{ service.name }} <span class="price">{{ calcServicesPrice(service) }} руб.</span></div>
+                <div class="in-orde-item" ng-if="calcServicesPrice(service)" ng-repeat="service in services">
+                    {{ service.name }} <span class="price">{{ calcServicesPrice(service) }} руб.</span>
+                </div>
                 <div class="in-orde-item" ng-if="!calcAllServicesPrice()">Дополнительные банные услуги</div>
             </div>
         </div>
@@ -23,7 +28,10 @@
         <div class="list-item"  ng-click="viewPage('store')">
             <div class="item-list-header">Аксессуары для бани <img src="images/svg/arrow-right.svg"></div>
             <div class="in-order">
-                <div class="in-orde-item" ng-repeat="good in store" ng-if="good.count > 0">{{good.name}} x{{good.count}} <span class="price">{{(good.price*good.count)}} руб.</span></div>
+                <div class="in-orde-item" ng-repeat="good in store" ng-if="good.count > 0">
+                    {{good.name}} x{{good.count}}
+                    <span class="price">{{(good.price*good.count)}} руб.</span>
+                </div>
             </div>
         </div>
 
@@ -89,7 +97,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="modal {{ leadFormError?'active':'closed' }}">
     <div class="content">
